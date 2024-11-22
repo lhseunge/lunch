@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>점심</title>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1ae4b8eac2d3c6b2d6193b6ce3ae66f"></script>
 
 </head>
 <style>
@@ -85,41 +86,49 @@
 
     /** functions */
     function getClock() {
-        document.getElementById("time").innerText = new Date().toLocaleDateString() + "\n" + new Date().toLocaleTimeString();
+
+        // 한글을 사용하는 요일을 위해서는 추가적으로 배열을 만들어서 사용합니다.
+        let day = ['일', '월', '화', '수', '목', '금', '토'];
+
+        let today = new Date();
+
+        document.getElementById("datetime").innerText =
+            (today.getMonth() + 1) + '월 ' + today.getDate() + '일 ' + day[today.getDay()] + '요일 ' + "\n" +
+            (today.getHours() < 12 ? "오전 " : "오후 ") + (today.getHours() < 12 ? today.getHours() : today.getHours() - 12) + '시 ' + today.getMinutes() + '분 '
     }
 
-    getClock()
-    setInterval(getClock,1000);
+    function getMap() {
+        map = new kakao.maps.Map(container, options); //지도 초기화
+    }
 
-
-    document.getElementById('callApiBtn').addEventListener('click', function () {
+    function getLocation() {
+        removeMarker()
 
         fetch('/lunch')
             .then(response => response.json())
-            .then(data => {
+            .then(async data => {
 
                 var randomIndex = Math.floor(Math.random() * data.length);
 
                 const item = data[randomIndex];
 
-                var container = document.getElementById('map1'); //지도를 담을 영역의 DOM 레퍼런스
-                var options = { //지도를 생성할 때 필요한 기본 옵션
-                    center: new kakao.maps.LatLng(item.latitude, item.longitude), //지도의 중심좌표.
-                    draggable: false,
-                    level: 3 //지도의 레벨(확대, 축소 정도)
-                };
+                console.log("item", item)
 
-                var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+                var newLatLng = new kakao.maps.LatLng(item.latitude, item.longitude)
+
+                map.panTo(newLatLng)
+
+                // await sleep(1000);
 
                 // 마커가 표시될 위치입니다
-                var mkPosition = new kakao.maps.LatLng(item.latitude, item.longitude);
+                let mkPosition = newLatLng;
 
                 // 마커를 생성합니다
-                var marker = new kakao.maps.Marker({
+                marker = new kakao.maps.Marker({
                     position: mkPosition
                 });
 
-                var customOverlay = new kakao.maps.CustomOverlay({
+                customOverlay = new kakao.maps.CustomOverlay({
                     map: map,
                     clickable: true,
                     content: '<div id="customOverlay"></div>',
@@ -129,26 +138,46 @@
                     zIndex: 3
                 });
 
-
-                document.getElementById('customOverlay').innerText = item.name;
-                document.getElementById('customOverlay').style.position = "relative";
-                document.getElementById('customOverlay').style.right = "50%";
-                document.getElementById('customOverlay').style.top = "-6em";
-                document.getElementById('customOverlay').style.backgroundColor = "rgba(120, 144, 156, 0.80)";
-                document.getElementById('customOverlay').style.borderRadius = "0.5em";
-                document.getElementById('customOverlay').style.padding = "15px 10px";
-                document.getElementById('customOverlay').style.fontWeight = "500";
-                document.getElementById('customOverlay').style.color = "#fff";
+                if (customOverlay !== undefined) {
+                    enableOverlayStyle(item)
+                }
 
                 // 마커가 지도 위에 표시되도록 설정합니다
                 marker.setMap(map);
                 customOverlay.setMap(map);
 
-                isGetLunch = true;
 
             })
-            .catch(error => console.error('Error:', error));
-    }, {once: true});
+            .catch(error => console.error('Error:', error))
+        // , {once: true}
+
+
+    }
+
+    function removeMarker() {
+
+        if (marker !== undefined) {
+            marker.setMap(null);
+            customOverlay.setMap(null);
+        }
+    }
+
+    function enableOverlayStyle(item) {
+
+        document.getElementById('customOverlay').innerText = item.name;
+        document.getElementById('customOverlay').style.position = "relative";
+        document.getElementById('customOverlay').style.right = "50%";
+        document.getElementById('customOverlay').style.top = "-6em";
+        document.getElementById('customOverlay').style.backgroundColor = "rgba(120, 144, 156, 0.80)";
+        document.getElementById('customOverlay').style.borderRadius = "0.5em";
+        document.getElementById('customOverlay').style.padding = "15px 10px";
+        document.getElementById('customOverlay').style.fontWeight = "500";
+        document.getElementById('customOverlay').style.color = "#fff";
+    }
+
+    function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
 
 
 </script>
