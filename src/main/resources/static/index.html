@@ -61,7 +61,29 @@
 
 <script>
 
+    /** field */
+    let map; // 지도 객체
+    var initLatLng = [37.4117516, 127.0960916]; // k2s 위경도
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    let options = { //지도를 생성할 때 필요한 기본 옵션
+        center: new kakao.maps.LatLng(initLatLng[0], initLatLng[1]), //지도의 중심좌표.
+        draggable: false,
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
 
+    let marker
+    let customOverlay
+
+    /** init */
+    getClock();
+    getMap();
+    setInterval(getClock, 1000);
+
+    /** click event */
+    document.getElementById('callApiBtn').addEventListener('click', getLocation)
+
+
+    /** functions */
     function getClock() {
         document.getElementById("time").innerText = new Date().toLocaleDateString() + "\n" + new Date().toLocaleTimeString();
     }
