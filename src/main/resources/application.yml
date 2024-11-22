@@ -7,7 +7,7 @@ spring:
       dialect: h2
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/DB/whattolun
+    url: jdbc:h2:~/DB/Workspace/lunch
     username: sa
     password:
   h2:
