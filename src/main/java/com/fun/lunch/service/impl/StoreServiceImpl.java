@@ -1,10 +1,10 @@
-package com.fun.whattolun.service.impl;
+package com.fun.lunch.service.impl;
 
-import com.fun.whattolun.dto.StoreRequest;
-import com.fun.whattolun.dto.StoreResponse;
-import com.fun.whattolun.entity.Store;
-import com.fun.whattolun.repository.StoreRepository;
-import com.fun.whattolun.service.StoreService;
+import com.fun.lunch.dto.StoreRequest;
+import com.fun.lunch.dto.StoreResponse;
+import com.fun.lunch.entity.Store;
+import com.fun.lunch.repository.StoreRepository;
+import com.fun.lunch.service.StoreService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

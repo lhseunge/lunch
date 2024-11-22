@@ -1,6 +1,6 @@
-package com.fun.whattolun.repository;
+package com.fun.lunch.repository;
 
-import com.fun.whattolun.entity.Store;
+import com.fun.lunch.entity.Store;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
-package com.fun.whattolun.controller;
+package com.fun.lunch.controller;
 
-import com.fun.whattolun.dto.StoreRequest;
-import com.fun.whattolun.service.StoreService;
+import com.fun.lunch.dto.StoreRequest;
+import com.fun.lunch.service.StoreService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

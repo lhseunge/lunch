@@ -1,7 +1,7 @@
-package com.fun.whattolun.service;
+package com.fun.lunch.service;
 
-import com.fun.whattolun.dto.StoreRequest;
-import com.fun.whattolun.dto.StoreResponse;
+import com.fun.lunch.dto.StoreRequest;
+import com.fun.lunch.dto.StoreResponse;
 
 import java.util.List;
 

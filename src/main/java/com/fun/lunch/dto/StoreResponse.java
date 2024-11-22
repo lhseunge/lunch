@@ -1,6 +1,6 @@
-package com.fun.whattolun.dto;
+package com.fun.lunch.dto;
 
-import com.fun.whattolun.entity.Store;
+import com.fun.lunch.entity.Store;
 
 public record StoreResponse(
         long id,

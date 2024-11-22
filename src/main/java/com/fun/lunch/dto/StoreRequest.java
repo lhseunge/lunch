@@ -1,4 +1,4 @@
-package com.fun.whattolun.dto;
+package com.fun.lunch.dto;
 
 public record StoreRequest(
         String name,

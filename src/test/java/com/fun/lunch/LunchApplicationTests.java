@@ -1,10 +1,10 @@
-package com.fun.whattolun;
+package com.fun.lunch;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WhattolunApplicationTests {
+class LunchApplicationTests {
 
     @Test
     void contextLoads() {

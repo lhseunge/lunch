@@ -1,6 +1,6 @@
-package com.fun.whattolun.entity;
+package com.fun.lunch.entity;
 
-import com.fun.whattolun.dto.StoreRequest;
+import com.fun.lunch.dto.StoreRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

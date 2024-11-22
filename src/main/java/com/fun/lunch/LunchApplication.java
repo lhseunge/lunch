@@ -1,13 +1,13 @@
-package com.fun.whattolun;
+package com.fun.lunch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WhattolunApplication {
+public class LunchApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WhattolunApplication.class, args);
+        SpringApplication.run(LunchApplication.class, args);
     }
 
 }
