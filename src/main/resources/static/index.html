@@ -4,53 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>점심</title>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1ae4b8eac2d3c6b2d6193b6ce3ae66f"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1ae4b8eac2d3c6b2d6193b6ce3ae66f"></script>
 
+    <style>
+
+        #customOverlay {
+            position: relative;
+            background-color: rgba(120, 144, 156, 0.80);
+            border-radius: 0.5em;
+            padding: 15px 10px;
+            font-weight: 500;
+            color: #fff;
+            transform: translateY(-100%);
+        }
+
+        .btn {
+            border: none;
+            display: block;
+            text-align: center;
+            cursor: pointer;
+            text-transform: uppercase;
+            outline: none;
+            overflow: hidden;
+            position: relative;
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+            background-color: #222;
+            padding: 17px 60px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 490%;
+            width: 140%;
+            background: #78c7d2;
+            /*color: #fff;*/
+            -webkit-transition: all .5s ease-in-out;
+            transition: all .5s ease-in-out;
+            -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+            transform: translateX(-98%) translateY(-25%) rotate(45deg);
+        }
+
+        .btn:hover:after {
+            -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+            transform: translateX(-9%) translateY(-25%) rotate(45deg);
+        }
+    </style>
 </head>
-<style>
-    .btn {
-        border: none;
-        display: block;
-        text-align: center;
-        cursor: pointer;
-        text-transform: uppercase;
-        outline: none;
-        overflow: hidden;
-        position: relative;
-        color: #fff;
-        font-weight: 700;
-        font-size: 15px;
-        background-color: #222;
-        padding: 17px 60px;
-        margin: 0 auto;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
-    }
 
-    .btn span {
-        position: relative;
-        z-index: 1;
-    }
-
-    .btn:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 490%;
-        width: 140%;
-        background: #78c7d2;
-        /*color: #fff;*/
-        -webkit-transition: all .5s ease-in-out;
-        transition: all .5s ease-in-out;
-        -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
-        transform: translateX(-98%) translateY(-25%) rotate(45deg);
-    }
-
-    .btn:hover:after {
-        -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
-    }
-</style>
 <body style="width: 100%; height: 100%;">
 
 <div id="mapBlock" style="text-align: center">
@@ -131,16 +144,16 @@
                 customOverlay = new kakao.maps.CustomOverlay({
                     map: map,
                     clickable: true,
-                    content: '<div id="customOverlay"></div>',
+                    content: `<div id="customOverlay">${item.name}</div>`,
                     position: mkPosition,
                     xAnchor: 0.5,
                     yAnchor: 1,
                     zIndex: 3
                 });
 
-                if (customOverlay !== undefined) {
-                    enableOverlayStyle(item)
-                }
+                // sleep(1000)
+
+                // enableOverlayStyle(item)
 
                 // 마커가 지도 위에 표시되도록 설정합니다
                 marker.setMap(map);
@@ -164,15 +177,15 @@
 
     function enableOverlayStyle(item) {
 
-        document.getElementById('customOverlay').innerText = item.name;
-        document.getElementById('customOverlay').style.position = "relative";
-        document.getElementById('customOverlay').style.right = "50%";
-        document.getElementById('customOverlay').style.top = "-6em";
-        document.getElementById('customOverlay').style.backgroundColor = "rgba(120, 144, 156, 0.80)";
-        document.getElementById('customOverlay').style.borderRadius = "0.5em";
-        document.getElementById('customOverlay').style.padding = "15px 10px";
-        document.getElementById('customOverlay').style.fontWeight = "500";
-        document.getElementById('customOverlay').style.color = "#fff";
+        // document.getElementById('customOverlay').innerText = item.name;
+        // document.getElementById('customOverlay').style.position = "relative";
+        // document.getElementById('customOverlay').style.right = "50%";
+        // document.getElementById('customOverlay').style.top = "-6em";
+        // document.getElementById('customOverlay').style.backgroundColor = "rgba(120, 144, 156, 0.80)";
+        // document.getElementById('customOverlay').style.borderRadius = "0.5em";
+        // document.getElementById('customOverlay').style.padding = "15px 10px";
+        // document.getElementById('customOverlay').style.fontWeight = "500";
+        // document.getElementById('customOverlay').style.color = "#fff";
     }
 
     function sleep(ms) {
