@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>점심</title>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1ae4b8eac2d3c6b2d6193b6ce3ae66f"></script>
+
+    <link rel="stylesheet" href="css/style.css"/>
+
+</head>
+
+<body style="width: 100%; height: 100%;">
+
+<div id="mapBlock">
+    <div id="datetime"></div>
+    <div id="map"></div>
+    <p>
+        <button id="callApiBtn" class="btn"><span>오늘의 점심은?</span></button>
+    </p>
+    <p>
+        <button id="callAddBtn" class="btn"><span>장소 등록하기</span></button>
+    </p>
+
+</div>
+
+<script>
+
+    /** field */
+    let map; // 지도 객체
+    // var initLatLng = [37.4117516, 127.0960916]; // k2s 위경도
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+
+    let marker
+    let customOverlay
+
+    /** init */
+    getTime();
+    initMap();
+    setInterval(getTime, 1000);
+
+    /** click event */
+    document.getElementById('callApiBtn').addEventListener('click', getLocation)
+    document.getElementById('callAddBtn').addEventListener('click', callAddMap)
+
+
+    /** functions */
+    function checkWatchPosition() {
+        navigator.geolocation.watchPosition(function (position) {
+                console.log("enable Geolocation");
+            },
+            function (error) {
+                if (error.code === error.PERMISSION_DENIED) {
+                    console.log(error)
+
+                    console.log("denied Geolocation");
+                } else {
+                    console.log(error)
+                    alert("위치 권한이 필요합니다.")
+                }
+
+                sleep(1000)
+
+                window.location.href = "error.html"
+            });
+    }
+
+
+    function getTime() {
+
+        // 한글을 사용하는 요일을 위해서는 추가적으로 배열을 만들어서 사용합니다.
+        let day = ['일', '월', '화', '수', '목', '금', '토'];
+
+        let today = new Date();
+
+        document.getElementById("datetime").innerText =
+            (today.getMonth() + 1) + '월 ' + today.getDate() + '일 ' + day[today.getDay()] + '요일 ' + "\n" +
+            (today.getHours() < 12 ? "오전 " : "오후 ") + (today.getHours() < 12 ? today.getHours() : today.getHours() - 12) + '시 ' + today.getMinutes() + '분 '
+    }
+
+    function initMap() {
+
+        if (navigator.geolocation) {
+
+            let initLatLng = [0, 0];
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+
+                initLatLng = [position.coords.latitude, position.coords.longitude];
+
+                var options = { //지도를 생성할 때 필요한 기본 옵션
+                    center: new kakao.maps.LatLng(initLatLng[0], initLatLng[1]), //지도의 중심좌표.
+                    draggable: false,
+                    level: 3 //지도의 레벨(확대, 축소 정도)
+                };
+
+                map = new kakao.maps.Map(container, options); //지도 초기화
+
+            })
+
+        } else {
+
+            window.location.href = "error.html"
+        }
+
+
+    }
+
+    function getLocation() {
+        removeMarker()
+
+        fetch('/lunch')
+            .then(response => response.json())
+            .then(async data => {
+
+                var randomIndex = Math.floor(Math.random() * data.length);
+
+                const item = data[randomIndex];
+
+                var newLatLng = new kakao.maps.LatLng(item.latitude, item.longitude)
+
+                map.panTo(newLatLng)
+
+                // await sleep(1000);
+
+                // 마커가 표시될 위치입니다
+                let mkPosition = newLatLng;
+
+                // 마커를 생성합니다
+                marker = new kakao.maps.Marker({
+                    position: mkPosition
+                });
+
+                customOverlay = new kakao.maps.CustomOverlay({
+                    map: map,
+                    clickable: true,
+                    content: `<div id="customOverlay">${item.name}</div>`,
+                    position: mkPosition,
+                    xAnchor: 0.5,
+                    yAnchor: 1,
+                    zIndex: 3
+                });
+
+                // sleep(1000)
+
+                // enableOverlayStyle(item)
+
+                // 마커가 지도 위에 표시되도록 설정합니다
+                marker.setMap(map);
+                customOverlay.setMap(map);
+
+
+            })
+            .catch(error => console.error('Error:', error))
+        // , {once: true}
+
+
+    }
+
+    function removeMarker() {
+
+        if (marker !== undefined) {
+            marker.setMap(null);
+            customOverlay.setMap(null);
+        }
+    }
+
+    function callAddMap() {
+
+        window.location.href = "add.html"
+
+
+    }
+
+    function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+
+</script>
+
+</body>
+</html>
