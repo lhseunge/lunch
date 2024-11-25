@@ -2,198 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>점심</title>
-    <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1ae4b8eac2d3c6b2d6193b6ce3ae66f"></script>
+    <title>인증</title>
 
-    <style>
-
-        #customOverlay {
-            position: relative;
-            background-color: rgba(120, 144, 156, 0.80);
-            border-radius: 0.5em;
-            padding: 15px 10px;
-            font-weight: 500;
-            color: #fff;
-            transform: translateY(-100%);
-        }
-
-        .btn {
-            border: none;
-            display: block;
-            text-align: center;
-            cursor: pointer;
-            text-transform: uppercase;
-            outline: none;
-            overflow: hidden;
-            position: relative;
-            color: #fff;
-            font-weight: 700;
-            font-size: 15px;
-            background-color: #222;
-            padding: 17px 60px;
-            margin: 0 auto;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
-        }
-
-        .btn span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .btn:after {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 490%;
-            width: 140%;
-            background: #78c7d2;
-            /*color: #fff;*/
-            -webkit-transition: all .5s ease-in-out;
-            transition: all .5s ease-in-out;
-            -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
-            transform: translateX(-98%) translateY(-25%) rotate(45deg);
-        }
-
-        .btn:hover:after {
-            -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-            transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        }
-    </style>
 </head>
 
-<body style="width: 100%; height: 100%;">
-
-<div id="mapBlock" style="text-align: center">
-    <div id="datetime" style="top: 50em; margin: 0 auto"></div>
-    <div id="map" style="width:500px;height:400px;margin:0 auto; border: black;"></div>
-    <h1></h1>
-    <button id="callApiBtn" class="btn"><span>오늘의 점심은?</span></button>
+<div id="loadBlock">
+    <p>Loading ...</p>
 </div>
+<div style="text-align: center">
+    <p>PASSWORD</p>
+    <p>
+        <input type="password" name="auth" id="loginInput"/>
+    </p>
+    <button type="button" id="loginBtn" class="btn">로그인</button>
+</div>
+
+</body>
 
 <script>
 
     /** field */
-    let map; // 지도 객체
-    var initLatLng = [37.4117516, 127.0960916]; // k2s 위경도
-    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-    let options = { //지도를 생성할 때 필요한 기본 옵션
-        center: new kakao.maps.LatLng(initLatLng[0], initLatLng[1]), //지도의 중심좌표.
-        draggable: false,
-        level: 3 //지도의 레벨(확대, 축소 정도)
-    };
-
-    let marker
-    let customOverlay
+    let lat;
+    let lng;
 
     /** init */
-    getClock();
-    getMap();
-    setInterval(getClock, 1000);
+    checkWatchPosition();
+    // var checkLoadGeoloactionInterval = setInterval(checkLoadGeolocation, 100);
 
-    /** click event */
-    document.getElementById('callApiBtn').addEventListener('click', getLocation)
-
+    /** event */
+    document.getElementById('loginBtn').addEventListener('click', getInputValue)
 
     /** functions */
-    function getClock() {
+    function checkWatchPosition() {
+        navigator.geolocation.watchPosition(function (position) {
+                console.log("enable Geolocation");
+                lat=position.coords.latitude;
+                lng=position.coords.longitude;
+            },
+            function (error) {
+                if (error.code === error.PERMISSION_DENIED) {
+                    console.log(error)
 
-        // 한글을 사용하는 요일을 위해서는 추가적으로 배열을 만들어서 사용합니다.
-        let day = ['일', '월', '화', '수', '목', '금', '토'];
+                    console.log("denied Geolocation");
+                } else if (error.code === error.POSITION_UNAVAILABLE) {
+                    console.log(error)
+                    alert("위치 권한이 필요합니다.")
+                }
 
-        let today = new Date();
 
-        document.getElementById("datetime").innerText =
-            (today.getMonth() + 1) + '월 ' + today.getDate() + '일 ' + day[today.getDay()] + '요일 ' + "\n" +
-            (today.getHours() < 12 ? "오전 " : "오후 ") + (today.getHours() < 12 ? today.getHours() : today.getHours() - 12) + '시 ' + today.getMinutes() + '분 '
+                // window.location.href = "error.html"
+            });
     }
 
-    function getMap() {
-        map = new kakao.maps.Map(container, options); //지도 초기화
-    }
+    function checkLoadGeolocation() {
+        if (lat !== undefined && lng !== undefined) {
 
-    function getLocation() {
-        removeMarker()
+            document.getElementById("loadBlock").style.display = "none";
 
-        fetch('/lunch')
-            .then(response => response.json())
-            .then(async data => {
-
-                var randomIndex = Math.floor(Math.random() * data.length);
-
-                const item = data[randomIndex];
-
-                console.log("item", item)
-
-                var newLatLng = new kakao.maps.LatLng(item.latitude, item.longitude)
-
-                map.panTo(newLatLng)
-
-                // await sleep(1000);
-
-                // 마커가 표시될 위치입니다
-                let mkPosition = newLatLng;
-
-                // 마커를 생성합니다
-                marker = new kakao.maps.Marker({
-                    position: mkPosition
-                });
-
-                customOverlay = new kakao.maps.CustomOverlay({
-                    map: map,
-                    clickable: true,
-                    content: `<div id="customOverlay">${item.name}</div>`,
-                    position: mkPosition,
-                    xAnchor: 0.5,
-                    yAnchor: 1,
-                    zIndex: 3
-                });
-
-                // sleep(1000)
-
-                // enableOverlayStyle(item)
-
-                // 마커가 지도 위에 표시되도록 설정합니다
-                marker.setMap(map);
-                customOverlay.setMap(map);
-
-
-            })
-            .catch(error => console.error('Error:', error))
-        // , {once: true}
-
-
-    }
-
-    function removeMarker() {
-
-        if (marker !== undefined) {
-            marker.setMap(null);
-            customOverlay.setMap(null);
+            clearInterval(checkLoadGeoloactionInterval)
         }
     }
 
-    function enableOverlayStyle(item) {
+    function getInputValue() {
 
-        // document.getElementById('customOverlay').innerText = item.name;
-        // document.getElementById('customOverlay').style.position = "relative";
-        // document.getElementById('customOverlay').style.right = "50%";
-        // document.getElementById('customOverlay').style.top = "-6em";
-        // document.getElementById('customOverlay').style.backgroundColor = "rgba(120, 144, 156, 0.80)";
-        // document.getElementById('customOverlay').style.borderRadius = "0.5em";
-        // document.getElementById('customOverlay').style.padding = "15px 10px";
-        // document.getElementById('customOverlay').style.fontWeight = "500";
-        // document.getElementById('customOverlay').style.color = "#fff";
+        console.log(document.getElementById("loginInput").value);
+
+        window.location.href = "map.html"
+            // + "?lat=" + lat + "&lng=" + lng
+        // window.location.href = "map.html" + "?lat=" + lat + "&lng=" + lng
     }
-
-    function sleep(ms) {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
-
 
 </script>
-
-</body>
 </html>
