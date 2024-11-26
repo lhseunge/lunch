@@ -8,21 +8,21 @@ public class ViewController {
 
     @GetMapping("/map")
     public String map() {
-        return "map.html";
+        return "map";
     }
 
     @GetMapping()
     public String index() {
-        return "index.html";
+        return "index";
     }
 
     @GetMapping("/add")
     public String add() {
-        return "add.html";
+        return "add";
     }
 
     @GetMapping("/error")
     public String error() {
-        return "error.html";
+        return "error";
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c1ae4b8eac2d3c6b2d6193b6ce3ae66f"></script>
 
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" th:href="@{css/style.css}"/>
 
 </head>
 
@@ -17,15 +17,15 @@
     <div id="datetime"></div>
     <div id="map"></div>
     <p>
-        <button id="callApiBtn" class="btn"><span>오늘의 점심은?</span></button>
+        <button id="callApiBtn" class="btn" th:onclick="getLocation()"><span>오늘의 점심은?</span></button>
     </p>
     <p>
-        <button id="callAddBtn" class="btn"><span>장소 등록하기</span></button>
+        <button id="callAddBtn" class="btn" th:onclick="callAddMap()"><span>장소 등록하기</span></button>
     </p>
 
 </div>
 
-<script>
+<script th:inline="javascript">
 
     /** field */
     let map; // 지도 객체
@@ -41,9 +41,6 @@
     setInterval(getTime, 1000);
 
     /** click event */
-    document.getElementById('callApiBtn').addEventListener('click', getLocation)
-    document.getElementById('callAddBtn').addEventListener('click', callAddMap)
-
 
     /** functions */
     function checkWatchPosition() {
@@ -168,7 +165,7 @@
 
     function callAddMap() {
 
-        window.location.href = "add.html"
+        location.href = "/add"
 
 
     }
