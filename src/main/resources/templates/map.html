@@ -78,29 +78,15 @@
 
     function initMap() {
 
-        if (navigator.geolocation) {
+        var latlng = JSON.parse(sessionStorage.getItem('latlng'))
 
-            let initLatLng = [0, 0];
-
-            navigator.geolocation.getCurrentPosition(function (position) {
-
-                initLatLng = [position.coords.latitude, position.coords.longitude];
-
-                var options = { //지도를 생성할 때 필요한 기본 옵션
-                    center: new kakao.maps.LatLng(initLatLng[0], initLatLng[1]), //지도의 중심좌표.
-                    draggable: false,
-                    level: 3 //지도의 레벨(확대, 축소 정도)
-                };
-
-                map = new kakao.maps.Map(container, options); //지도 초기화
-
-            })
-
-        } else {
-
-            window.location.href = "error.html"
+        var options = { //지도를 생성할 때 필요한 기본 옵션
+            center: new kakao.maps.LatLng(latlng.latitude, latlng.longitude), //지도의
+            draggable: false,
+            level: 3 //지도의 레벨(확대, 축소 정도)
         }
 
+        map = new kakao.maps.Map(container, options); //지도 초기화
 
     }
 
