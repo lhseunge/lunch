@@ -8,8 +8,10 @@
 
 </head>
 <body>
-
-<div style="text-align: center">
+<div id="loadBlock" style="text-align: center">
+    <p>Loading ...</p>
+</div>
+<div id="authBlock" style="text-align: center; display: none">
     <p>PASSWORD</p>
     <p>
         <input type="password" name="auth" id="loginInput"/>
@@ -30,6 +32,7 @@
     /** functions */
     function checkWatchPosition() {
         navigator.geolocation.watchPosition(function (position) {
+                toggleBlockDisplay()
                 console.log("enable Geolocation");
                 latlng = {
                     latitude: position.coords.latitude,
@@ -60,6 +63,11 @@
         sessionStorage.setItem('latlng', JSON.stringify(latlng));
 
         location.href = "/map"
+    }
+
+    function toggleBlockDisplay() {
+        document.getElementById("loadBlock").style.display = "none"
+        document.getElementById("authBlock").style.display = "block"
     }
 
 </script>
