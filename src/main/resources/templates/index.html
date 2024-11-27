@@ -47,6 +47,8 @@
                     alert("위치 권한이 필요합니다.")
                 }
 
+                sessionStorage.setItem('errorCause', error.message);
+
                 location.href = "/error"
             });
     }

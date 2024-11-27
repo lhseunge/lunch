@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ERROR</title>
+
+</head>
+<body style="">
+
+<div style="text-align: center">
+    <p>ERROR</p>
+    <p id="cause">Default Message</p>
+</div>
+
+</body>
+
+<script>
+    document.getElementById("cause").innerText = "Cause: " + sessionStorage.getItem("errorCause")
+</script>
+
+</html>
