@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Store {
 
     @Id()
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     private String name;
 
