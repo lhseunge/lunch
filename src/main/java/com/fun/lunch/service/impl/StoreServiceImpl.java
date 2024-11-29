@@ -1,10 +1,13 @@
 package com.fun.lunch.service.impl;
 
+import com.fun.lunch.config.ExceptionCode;
+import com.fun.lunch.dto.ResponseException;
 import com.fun.lunch.dto.StoreRequest;
 import com.fun.lunch.dto.StoreResponse;
 import com.fun.lunch.entity.Store;
 import com.fun.lunch.repository.StoreRepository;
 import com.fun.lunch.service.StoreService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +42,9 @@ public class StoreServiceImpl implements StoreService {
     public void saveStore(StoreRequest storeRequest) {
 
         Store store = new Store(storeRequest);
-
+        if (isExistsStore(store)) {
+            throw new ResponseException(HttpStatus.BAD_REQUEST, ExceptionCode.EXIST_STORE);
+        }
         storeRepository.save(store);
 
     }
@@ -47,5 +52,10 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public void deleteStore(long id) {
         storeRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean isExistsStore(Store store) {
+        return storeRepository.existsByNameAndLatitudeAndLongitude(store.getName(), store.getLatitude(), store.getLongitude());
     }
 }
