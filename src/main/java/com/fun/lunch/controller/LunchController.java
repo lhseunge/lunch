@@ -3,6 +3,7 @@ package com.fun.lunch.controller;
 import com.fun.lunch.dto.StoreRequest;
 import com.fun.lunch.service.StoreService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class LunchController {
 
     @PostMapping()
     @Operation(summary = "가게 저장")
-    public ResponseEntity<?> saveStore(@RequestBody StoreRequest storeRequest) {
+    public ResponseEntity<?> saveStore(@RequestBody @Valid StoreRequest storeRequest) {
 
         storeService.saveStore(storeRequest);
         return new ResponseEntity<>(HttpStatus.OK);
