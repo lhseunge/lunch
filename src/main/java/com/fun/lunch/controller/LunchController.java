@@ -25,6 +25,7 @@ public class LunchController {
     }
 
     @GetMapping("/random")
+    @Operation(summary = "점심메뉴 뽑기")
     public ResponseEntity<?> getRandomStore() {
 
         return new ResponseEntity<>(storeService.getRandomStores(), HttpStatus.OK);
