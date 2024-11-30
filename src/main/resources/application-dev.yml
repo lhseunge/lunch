@@ -1,0 +1,30 @@
+server:
+  port: 8814
+  ssl:
+    enabled: true
+    key-store: keystore.p12
+    key-store-type: PKCS12
+    key-store-password: password
+
+spring:
+  data:
+    jdbc:
+      dialect: h2
+  datasource:
+    driver-class-name:
+    url: j
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        show_sql: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
