@@ -97,6 +97,11 @@
             .then(response => response.json())
             .then(async data => {
 
+                if (data) {
+                    alert("등록된 장소가 없습니다.")
+                    return
+                }
+
                 var randomIndex = Math.floor(Math.random() * data.length);
 
                 const item = data[randomIndex];
