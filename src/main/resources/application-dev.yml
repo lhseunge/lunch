@@ -9,14 +9,14 @@ server:
 spring:
   data:
     jdbc:
-      dialect: h2
+      dialect: postgresql
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/lunch
     username: seungpro
     password: seungpro
   jpa:
-    database-platform: org.hibernate.dialect.
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: create
     properties:
