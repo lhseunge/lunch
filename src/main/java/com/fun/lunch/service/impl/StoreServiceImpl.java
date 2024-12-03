@@ -38,7 +38,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void saveStore(StoreRequest storeRequest) {
+    public StoreRequest saveStore(StoreRequest storeRequest) {
 
         Store store = new Store(storeRequest);
         if (isExistsStore(store)) {
@@ -46,11 +46,14 @@ public class StoreServiceImpl implements StoreService {
         }
         storeRepository.save(store);
 
+        return storeRequest;
+
     }
 
     @Override
-    public void deleteStore(long id) {
+    public long deleteStore(long id) {
         storeRepository.deleteById(id);
+        return id;
     }
 
     @Override

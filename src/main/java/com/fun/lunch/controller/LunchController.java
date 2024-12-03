@@ -36,15 +36,13 @@ public class LunchController {
     @Operation(summary = "가게 저장")
     public ResponseEntity<?> saveStore(@RequestBody @Valid StoreRequest storeRequest) {
 
-        storeService.saveStore(storeRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(storeService.saveStore(storeRequest), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "가게 삭제")
     public ResponseEntity<?> deleteStore(@PathVariable long id) {
 
-        storeService.deleteStore(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(storeService.deleteStore(id), HttpStatus.OK);
     }
 }

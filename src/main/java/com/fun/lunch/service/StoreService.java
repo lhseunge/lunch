@@ -10,8 +10,8 @@ public interface StoreService {
 
     List<StoreResponse> getStores();
     StoreResponse getRandomStores();
-    void saveStore(StoreRequest storeRequest);
-    void deleteStore(long id);
+    StoreRequest saveStore(StoreRequest storeRequest);
+    long deleteStore(long id);
 
     boolean isExistsStore(Store store);
 }
