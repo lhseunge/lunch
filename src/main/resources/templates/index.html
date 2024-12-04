@@ -14,9 +14,9 @@
     <p>Loading ...</p>
 </div>
 <div id="authBlock" style="text-align: center; display: none">
-    <p>PASSWORD</p>
+    <p>Input Personal Key</p>
     <p>
-        <input type="password" name="auth" id="loginInput"/>
+        <input type="text" name="personalKey" id="personalKeyInput"/>
     </p>
     <button type="button" id="loginBtna" class="btn" th:onclick="getInputValue()">로그인</button>
 </div>
@@ -59,7 +59,7 @@
 
     function getInputValue() {
 
-        console.log(document.getElementById("loginInput").value);
+        var personalKey = document.getElementById("personalKeyInput").value;
 
         sessionStorage.setItem('latlng', JSON.stringify(latlng));
 
