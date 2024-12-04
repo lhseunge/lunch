@@ -7,6 +7,7 @@ import com.fun.lunch.dto.StoreResponse;
 import com.fun.lunch.entity.Store;
 import com.fun.lunch.repository.StoreRepository;
 import com.fun.lunch.service.StoreService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public List<StoreResponse> getStores() {
+    @Cacheable(value = "personalKey")
+    public List<StoreResponse> getStores(String personalKey) {
 
         return storeRepository.findAll().stream().map(StoreResponse::new).toList();
     }

@@ -18,11 +18,11 @@ public class LunchController {
         this.storeService = storeService;
     }
 
-    @GetMapping()
+    @GetMapping("/{personalKey}")
     @Operation(summary = "가게 조회")
-    public ResponseEntity<?> getStores() {
+    public ResponseEntity<?> getStores(String personalKey) {
 
-        return new ResponseEntity<>(storeService.getStores(), HttpStatus.OK);
+        return new ResponseEntity<>(storeService.getStores(personalKey), HttpStatus.OK);
     }
 
     @GetMapping("/random")

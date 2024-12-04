@@ -31,6 +31,7 @@
     let map; // 지도 객체
     // var initLatLng = [37.4117516, 127.0960916]; // k2s 위경도
     var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var personalKey = sessionStorage.getItem('personalKey');
 
     let marker
     let customOverlay
@@ -93,7 +94,7 @@
     function getLocation() {
         removeMarker()
 
-        fetch('/lunch')
+        fetch(`/lunch/${personalKey}`)
             .then(response => response.json())
             .then(async data => {
 

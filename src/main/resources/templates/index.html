@@ -61,6 +61,7 @@
 
         var personalKey = document.getElementById("personalKeyInput").value;
 
+        sessionStorage.setItem('personalKey', personalKey);
         sessionStorage.setItem('latlng', JSON.stringify(latlng));
 
         location.href = "/map"
