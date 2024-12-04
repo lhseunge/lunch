@@ -1,3 +1,18 @@
+server:
+  port: 8814
+  ssl:
+    enabled: true
+    key-store: keystore.p12
+    key-store-type: PKCS12
+    key-store-password: password
+
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
   profiles:
     active: dev
