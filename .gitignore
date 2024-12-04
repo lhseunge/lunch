@@ -40,4 +40,4 @@ out/
 keystore.p12
 
 ### postgres ###
-compse/postgres-data
+/postgres-data/
