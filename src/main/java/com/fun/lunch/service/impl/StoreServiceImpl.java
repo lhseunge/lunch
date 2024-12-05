@@ -7,6 +7,7 @@ import com.fun.lunch.dto.StoreResponse;
 import com.fun.lunch.entity.Store;
 import com.fun.lunch.repository.StoreRepository;
 import com.fun.lunch.service.StoreService;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    @CacheEvict(value = "personalKey", key = "#storeRequst.personalKey")
     public StoreRequest saveStore(StoreRequest storeRequest) {
 
         Store store = storeRequest.toEntity();
