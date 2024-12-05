@@ -14,4 +14,8 @@ public record StoreRequest(
     public StoreRequest(String name, double latitude, double longitude) {
         this(name, "", latitude, longitude);
     }
+
+    public Store toEntity() {
+        return new Store(this);
+    }
 }

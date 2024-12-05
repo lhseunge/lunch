@@ -42,7 +42,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreRequest saveStore(StoreRequest storeRequest) {
 
-        Store store = new Store(storeRequest);
+        Store store = storeRequest.toEntity();
         if (isExistsStore(store)) {
             throw ResponseException.from(CustomExceptionEnum.EXIST_STORE);
         }
