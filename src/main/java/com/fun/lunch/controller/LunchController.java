@@ -18,7 +18,7 @@ public class LunchController {
         this.storeService = storeService;
     }
 
-    @GetMapping("/{personalKey}")
+    @GetMapping("")
     @Operation(summary = "가게 조회")
     public ResponseEntity<?> getStores(String personalKey) {
 
