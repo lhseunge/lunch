@@ -166,6 +166,22 @@
         return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
+    function deleteLocation() {
+
+        if (confirm("삭제하시겠습니까?")) {
+
+            fetch(`"/lunch/${id}?"` + new URLSearchParams({personalKey: personalKey}).toString())
+                .then(response => response.json())
+                .then(data => data)
+                .catch(error => console.error('Error:', error))
+
+            alert("삭제되었습니다.")
+
+            location.href = "/map"
+        }
+
+    }
+
 
 </script>
 
