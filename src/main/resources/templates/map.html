@@ -124,7 +124,7 @@
                 customOverlay = new kakao.maps.CustomOverlay({
                     map: map,
                     clickable: true,
-                    content: `<div id="customOverlay">${item.name}</div>`,
+                    content: `<div id="customOverlay">${item.name}<button id="deleteBtn" onclick="deleteLocation()">❌️</button></div>`,
                     position: mkPosition,
                     xAnchor: 0.5,
                     yAnchor: 1,
