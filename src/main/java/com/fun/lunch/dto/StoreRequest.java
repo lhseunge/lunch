@@ -1,18 +1,21 @@
 package com.fun.lunch.dto;
 
+import com.fun.lunch.entity.Store;
 import jakarta.validation.constraints.NotNull;
 
 public record StoreRequest(
         @NotNull
         String name,
-        String description,
         @NotNull
         double latitude,
         @NotNull
-        double longitude
+        double longitude,
+        @NotNull
+        String personalKey,
+        String description
 ) {
-    public StoreRequest(String name, double latitude, double longitude) {
-        this(name, "", latitude, longitude);
+    public StoreRequest(String name, double latitude, double longitude, String personalKey) {
+        this(name, latitude, longitude, personalKey, "");
     }
 
     public Store toEntity() {
