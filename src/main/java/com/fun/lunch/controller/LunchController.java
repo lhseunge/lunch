@@ -41,8 +41,8 @@ public class LunchController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "가게 삭제")
-    public ResponseEntity<?> deleteStore(@PathVariable long id) {
+    public ResponseEntity<?> deleteStore(@PathVariable long id, String personalKey) {
 
-        return new ResponseEntity<>(storeService.deleteStore(id), HttpStatus.OK);
+        return new ResponseEntity<>(storeService.deleteStore(id, personalKey), HttpStatus.OK);
     }
 }

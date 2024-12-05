@@ -14,7 +14,7 @@ public interface StoreService {
 
     StoreResponse getRandomStores();
     StoreRequest saveStore(StoreRequest storeRequest);
-    long deleteStore(long id);
+    long deleteStore(long id, String personalKey);
 
     boolean isExistsStore(Store store);
 }

@@ -53,7 +53,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public long deleteStore(long id) {
+    public long deleteStore(long id, String personalKey) {
         storeRepository.deleteById(id);
         return id;
     }
