@@ -21,6 +21,9 @@ public class Store {
     private double latitude;
     private double longitude;
 
+    @ManyToOne()
+    @JoinColumn(name = "personal_key_id", nullable = false)
+    private PersonalKey personalKey;
 
     public Store(StoreRequest storeRequest) {
         this.name = storeRequest.name();
