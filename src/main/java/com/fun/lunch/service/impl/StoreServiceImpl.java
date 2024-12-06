@@ -27,7 +27,9 @@ public class StoreServiceImpl implements StoreService {
     @Cacheable(value = "personalKey")
     public List<StoreResponse> getStores(String personalKey) {
 
-        return storeRepository.findAll().stream().map(StoreResponse::new).toList();
+        return storeRepository.findAllByPersonal(Personal.of(personalKey)).stream()
+                .map(StoreResponse::new)
+                .toList();
     }
 
     @Override
