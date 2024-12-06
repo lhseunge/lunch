@@ -30,5 +30,6 @@ public class Store {
         this.description = storeRequest.description();
         this.latitude = storeRequest.latitude();
         this.longitude = storeRequest.longitude();
+        this.personal = Personal.of(storeRequest.personalKey());
     }
 }
