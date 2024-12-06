@@ -57,6 +57,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    @CacheEvict(value = "personalKey", key = "#personalKey")
     public long deleteStore(long id, String personalKey) {
         storeRepository.deleteById(id);
         return id;
