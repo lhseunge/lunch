@@ -98,9 +98,7 @@
             .then(response => response.json())
             .then(data => {
 
-                console.log(data.length);
-
-                if (data.length) {
+                if (data.length === 0) {
                     alert("등록된 장소가 없습니다.")
                     return
                 }
