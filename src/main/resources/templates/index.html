@@ -61,10 +61,32 @@
 
         var personalKey = document.getElementById("personalKeyInput").value;
 
-        sessionStorage.setItem('personalKey', personalKey);
-        sessionStorage.setItem('latlng', JSON.stringify(latlng));
+        console.log(personalKey);
 
-        location.href = "/map"
+        fetch("/personal", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "personalKey": personalKey
+            })
+        }).then(response => response.json())
+            .then(data => {
+
+                sessionStorage.setItem('personal', data.personalKey);
+                sessionStorage.setItem('latlng', JSON.stringify(latlng));
+
+                location.href = "/map"
+
+            })
+            .catch(error => {
+
+                sessionStorage.setItem('errorCause', error.message);
+
+                location.href = "/error"
+            })
+
     }
 
     function toggleBlockDisplay() {

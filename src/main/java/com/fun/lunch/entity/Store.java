@@ -22,8 +22,8 @@ public class Store {
     private double longitude;
 
     @ManyToOne()
-    @JoinColumn(name = "personal_key_id", nullable = false)
-    private PersonalKey personalKey;
+    @JoinColumn(name = "personal_key")
+    private Personal personal;
 
     public Store(StoreRequest storeRequest) {
         this.name = storeRequest.name();

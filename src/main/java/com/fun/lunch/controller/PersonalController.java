@@ -1,18 +1,30 @@
 package com.fun.lunch.controller;
 
+import com.fun.lunch.dto.PersonalRequest;
 import com.fun.lunch.service.PersonalService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/personal")
 public class PersonalController {
 
-    private PersonalService personalService;
+    private final PersonalService personalService;
 
-    public ResponseEntity<?> addPersonalKey(String personalKey) {
+    public PersonalController(PersonalService personalService) {
+        this.personalService = personalService;
+    }
 
-        personalService.insertPersonalKey(personalKey);
+    @PostMapping
+    public ResponseEntity<?> addPersonalKey(@RequestBody @Valid PersonalRequest personalRequest) {
 
-        return ResponseEntity.ok().build();
+        personalService.insertPersonalKey(personalRequest.personalKey());
+
+        return new ResponseEntity<>(personalRequest, HttpStatus.OK);
     }
 }
