@@ -1,6 +1,5 @@
-package com.fun.lunch.dto;
+package com.fun.lunch.exception;
 
-import com.fun.lunch.config.CustomExceptionEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

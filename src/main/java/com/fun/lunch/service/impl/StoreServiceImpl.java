@@ -1,7 +1,7 @@
 package com.fun.lunch.service.impl;
 
-import com.fun.lunch.config.CustomExceptionEnum;
-import com.fun.lunch.dto.ResponseException;
+import com.fun.lunch.exception.CustomExceptionEnum;
+import com.fun.lunch.exception.ResponseException;
 import com.fun.lunch.dto.StoreRequest;
 import com.fun.lunch.dto.StoreResponse;
 import com.fun.lunch.entity.Store;
