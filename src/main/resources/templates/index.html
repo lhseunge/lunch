@@ -74,7 +74,7 @@
         }).then(response => response.json())
             .then(data => {
 
-                sessionStorage.setItem('personal', data.personalKey);
+                sessionStorage.setItem('personalKey', data.personalKey);
                 sessionStorage.setItem('latlng', JSON.stringify(latlng));
 
                 location.href = "/map"
