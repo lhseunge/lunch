@@ -1,6 +1,8 @@
 package com.fun.lunch.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +17,7 @@ public class Personal {
     @Id
     private String key;
 
+    public static Personal of(String personalKey) {
+        return new Personal(personalKey);
+    }
 }
