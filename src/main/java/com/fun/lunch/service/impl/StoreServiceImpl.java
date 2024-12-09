@@ -34,7 +34,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public StoreResponse getRandomStores() {
+    public StoreResponse getRandomStore(List<StoreResponse> stores) {
 
         List<StoreResponse> stores = storeRepository.findAll().stream().map(StoreResponse::new).toList();
 

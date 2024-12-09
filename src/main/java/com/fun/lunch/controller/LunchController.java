@@ -1,12 +1,15 @@
 package com.fun.lunch.controller;
 
 import com.fun.lunch.dto.StoreRequest;
+import com.fun.lunch.dto.StoreResponse;
 import com.fun.lunch.service.StoreService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController()
 @RequestMapping("/lunch")
@@ -27,9 +30,11 @@ public class LunchController {
 
     @GetMapping("/random")
     @Operation(summary = "점심메뉴 뽑기")
-    public ResponseEntity<?> getRandomStore() {
+    public ResponseEntity<?> getRandomStore(String personalKey) {
 
-        return new ResponseEntity<>(storeService.getRandomStores(), HttpStatus.OK);
+        List<StoreResponse> stores = storeService.getStores(personalKey);
+
+        return new ResponseEntity<>(storeService.getRandomStore(stores), HttpStatus.OK);
     }
 
     @PostMapping()

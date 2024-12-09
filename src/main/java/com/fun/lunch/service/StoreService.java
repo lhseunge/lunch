@@ -10,7 +10,8 @@ public interface StoreService {
 
     List<StoreResponse> getStores(String personalKey);
 
-    StoreResponse getRandomStores();
+    StoreResponse getRandomStore(List<StoreResponse> stores);
+
     StoreRequest saveStore(StoreRequest storeRequest);
     long deleteStore(long id, String personalKey);
 
