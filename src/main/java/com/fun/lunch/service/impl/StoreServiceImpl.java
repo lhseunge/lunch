@@ -36,7 +36,9 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreResponse getRandomStore(List<StoreResponse> stores) {
 
-        List<StoreResponse> stores = storeRepository.findAll().stream().map(StoreResponse::new).toList();
+        if (stores.isEmpty()) {
+            throw ResponseException.from(CustomExceptionEnum.EMPTY_STORE_DATA);
+        }
 
         int randomIndex = new Random().nextInt(stores.size());
 
