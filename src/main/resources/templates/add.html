@@ -45,6 +45,7 @@
     var markers = [];
 
     var latlng = JSON.parse(sessionStorage.getItem('latlng'))
+    var personalKey = sessionStorage.getItem('personalKey');
 
     /** init */
     initMap();
@@ -285,7 +286,8 @@
                 body: JSON.stringify({
                     "name": title,
                     "latitude": marker.getPosition().getLat(),
-                    "longitude": marker.getPosition().getLng()
+                    "longitude": marker.getPosition().getLng(),
+                    "personalKey": personalKey
                 })
             }).then(response => response.json())
                 .then(data => {
