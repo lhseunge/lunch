@@ -44,7 +44,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    @CacheEvict(value = "personalKey", key = "#storeRequst.personalKey")
+    @CacheEvict(value = "personalKey", key = "#storeRequest.personalKey")
     public StoreRequest saveStore(StoreRequest storeRequest) {
 
         Store store = storeRequest.toEntity();
