@@ -21,7 +21,7 @@ public class Store {
     private double latitude;
     private double longitude;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     @JoinColumn(name = "personal_key")
     private Personal personal;
 
