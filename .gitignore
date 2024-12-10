@@ -41,3 +41,6 @@ keystore.p12
 
 ### postgres ###
 /postgres-data/
+
+### privateKey ###
+/src/main/resources/keys/
