@@ -13,7 +13,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class StoreServiceImpl implements StoreService {
@@ -40,7 +40,7 @@ public class StoreServiceImpl implements StoreService {
             throw ResponseException.from(CustomExceptionEnum.EMPTY_STORE_DATA);
         }
 
-        int randomIndex = new Random().nextInt(stores.size());
+        int randomIndex = ThreadLocalRandom.current().nextInt(stores.size());
 
         return stores.get(randomIndex);
     }
