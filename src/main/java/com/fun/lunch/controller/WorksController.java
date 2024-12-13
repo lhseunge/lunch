@@ -38,11 +38,7 @@ public class WorksController {
     @GetMapping("/redirect")
     public String redirect() {
 
-        String jwt = jwtTokenProvider.createAccessToken();
-
-        System.out.println("jwt = " + jwt);
-
-        return jwt;
+        return jwtTokenProvider.createAccessToken();
 
     }
 }
