@@ -20,11 +20,11 @@ public class JwtTokenProvider {
     @Value("${works.auth.clientId}")
     private String clientId;
 
-    @Value("${works.auth.serviceAccount}")
-    private String serviceAccount;
-
     @Value("${jwt.expiration_time}")
     private long accessTokenExpTime;
+
+    @Value("${works.auth.serviceAccount}")
+    private String serviceAccount;
 
     private final PrivateKey privateKey;
 
