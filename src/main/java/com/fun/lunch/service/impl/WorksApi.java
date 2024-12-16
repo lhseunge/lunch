@@ -1,6 +1,8 @@
 package com.fun.lunch.service.impl;
 
 import com.fun.lunch.dto.BotMessageWrapper;
+import com.fun.lunch.exception.CustomExceptionEnum;
+import com.fun.lunch.exception.ResponseException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
@@ -29,7 +31,7 @@ public class WorksApi {
                 .bodyValue(content)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, response -> response.bodyToMono(String.class)
-                        .map(errorBody -> new RuntimeException("4xx error: " + errorBody)))
+                        .map(errorBody -> ResponseException.from(CustomExceptionEnum.WORKS_EXCEPTION, "4xx error: " + errorBody)))
                 .bodyToMono(String.class)
                 .block();
     }

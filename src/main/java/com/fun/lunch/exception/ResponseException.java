@@ -20,4 +20,11 @@ public class ResponseException extends RuntimeException {
 
         );
     }
+
+    public static ResponseException from(CustomExceptionEnum customExceptionEnum, String message) {
+        return new ResponseException(
+                customExceptionEnum.getHttpStatus(),
+                message,
+                customExceptionEnum.getErrorCode());
+    }
 }
