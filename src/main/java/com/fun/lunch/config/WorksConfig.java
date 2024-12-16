@@ -33,7 +33,6 @@ public class WorksConfig {
                 .baseUrl(apiBaseUrl)
                 .defaultHeaders(header -> {
                     header.add("Content-Type", "application/json");
-                    header.add("Authorization", "Bearer kr1AAABLUn2hywkjZz7ToH8Cx8z5pgt3lxwypF8tULvbzm3ROfnL6hHkvdRz2FZF2mveNnoCXwx3twZ1xdRxX1kWgWDVCdSGWwkwy1xsCR6Bwvo0hXnyv9AcbUhjPHWwFw/RgwdJstrdCAmLP5/C+0wl4yB0Jx91NKpxdz3KN8MbyrOkr/q3kOteEQM8tA9VWiEub/6ooyFQ7ANr4n9xayiuEHHBdPgyIr4582lByIhinQdZVszzIPD/aZ54RvyoB7frvOX5KHHlT1Duq1FIgKpuCBBtsN/c0tUnoh+U8e0nAIFmatp4994oizJz5AmF3Tn28PBTT03YMYnNsyfiSvkxFfxfBFPpwmBl9VCMLSCMjbbHpMeZ0Z22PsH/CczDUik/wTUimV6fhg3zWaq0nCSabLOeQo=.kwiu9yNovfcs8Rumz2QSOg");
                 })
                 .build();
     }
