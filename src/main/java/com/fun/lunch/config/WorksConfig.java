@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-public class WorksWebClientConfig {
+public class WorksConfig {
 
-    @Value("${works.auth.baseUrl")
+    @Value("${works.auth.baseUrl}")
     private String authBaseUrl;
 
     @Value("${works.api.baseUrl}")
