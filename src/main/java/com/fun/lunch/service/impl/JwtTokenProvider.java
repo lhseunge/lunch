@@ -53,7 +53,7 @@ public class JwtTokenProvider {
      * Access Token 생성
      * @return Access Token String
      */
-    public String createAccessToken() {
+    public String buildAssertionToken() {
         return createToken(accessTokenExpTime);
     }
 
