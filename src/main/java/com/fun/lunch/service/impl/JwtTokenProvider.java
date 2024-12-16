@@ -66,7 +66,8 @@ public class JwtTokenProvider {
     private String createToken(long expireTime) {
 
         Instant iat = Instant.now();
-        String jwt =  Jwts.builder()
+
+        return Jwts.builder()
                 .header()
                         .add("typ","JWT")
                         .and()
@@ -76,10 +77,6 @@ public class JwtTokenProvider {
                 .expiration(Date.from(iat.plusSeconds(expireTime)))
                 .signWith(privateKey)
                 .compact();
-
-        System.out.println("jwt = " + jwt);
-
-        return jwt;
     }
 
 }
