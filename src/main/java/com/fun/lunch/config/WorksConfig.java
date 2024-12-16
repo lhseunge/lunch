@@ -21,7 +21,7 @@ public class WorksConfig {
         return WebClient.builder()
                 .baseUrl(authBaseUrl)
                 .defaultHeaders(header -> {
-                    header.add("Content-Type", "application/json");
+                    header.add("Content-Type", "application/x-www-form-urlencoded");
                 })
                 .build();
     }
