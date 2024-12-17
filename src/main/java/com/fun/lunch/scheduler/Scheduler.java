@@ -15,8 +15,6 @@ public class Scheduler {
         this.worksService = worksService;
     }
 
-    @Scheduled(cron = "0/5 * * * * *")
-//    @Scheduled(cron = "0 * * * * *")
     @Scheduled(cron = "0 20 10 * * *")
     public void sendTodayLunch() {
         worksService.sendBotMessage();
