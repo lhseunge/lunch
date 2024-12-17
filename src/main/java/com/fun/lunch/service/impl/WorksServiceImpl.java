@@ -1,5 +1,6 @@
 package com.fun.lunch.service.impl;
 
+import com.fun.lunch.dto.BotMessageButtonAction;
 import com.fun.lunch.dto.BotMessageWrapper;
 import com.fun.lunch.dto.WorksAccessToken;
 import com.fun.lunch.dto.WorksAccessTokenRequest;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
@@ -76,7 +78,9 @@ public class WorksServiceImpl implements WorksService {
         String todayStore = storeService.getRandomStore(storeService.getStores("k2systems")).name();
         String content = String.format("오늘 점심은\n[%s]\n어떠세요?", todayStore);
 
-        BotMessageWrapper<?> text = BotMessageWrapper.text(content);
+        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "웹으로 가기", "https://192.168.0.15:8814/"));
+
+        BotMessageWrapper<?> text = BotMessageWrapper.button(content, actions);
 
         worksApi.sendWorksBotMessage(accessToken, text);
 
