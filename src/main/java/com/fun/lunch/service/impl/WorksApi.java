@@ -23,11 +23,10 @@ public class WorksApi {
 
     public void sendWorksBotMessage(String accessToken, BotMessageWrapper<?> content) {
 
-//        String userId = "9d4561f5-5dc2-453c-12d0-0370e4e7217c";
-        String userId = "f21f5bb9-ad67-49ed-18d7-03f1691fa87a";
+        String channelId = "0781e7d9-6c8b-270b-bffc-83be2de971ff";
 
         webClient.post()
-                .uri("/bots/{botId}/users/{userId}/messages", botId, userId)
+                .uri("/bots/{botId}/channels/{channelId}/messages", botId, channelId)
                 .headers(header -> header.add("Authorization", accessToken))
                 .bodyValue(content)
                 .retrieve()
