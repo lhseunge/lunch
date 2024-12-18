@@ -23,7 +23,8 @@ public class WorksApi {
 
     public void sendWorksBotMessage(String accessToken, BotMessageWrapper<?> content) {
 
-        String channelId = "0781e7d9-6c8b-270b-bffc-83be2de971ff";
+        String channelId = "15e30482-5dd0-a8a9-086e-f65f3974f603"; // prod
+//        String channelId = "0781e7d9-6c8b-270b-bffc-83be2de971ff"; // dev
 
         webClient.post()
                 .uri("/bots/{botId}/channels/{channelId}/messages", botId, channelId)
