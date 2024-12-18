@@ -94,7 +94,7 @@
     function getLocation() {
         removeMarker()
 
-        fetch("/lunch?" + new URLSearchParams({personalKey: personalKey}).toString())
+        fetch("/store?" + new URLSearchParams({personalKey: personalKey}).toString())
             .then(response => response.json())
             .then(data => {
 

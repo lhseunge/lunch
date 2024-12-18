@@ -278,7 +278,7 @@
     function saveStore(title, marker) {
 
         if (confirm("[" + title + "] " + "저장하시겠습니까?")) {
-            fetch("/lunch", {
+            fetch("/store", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

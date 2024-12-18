@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
-@RequestMapping("/lunch")
-public class LunchController {
+@RequestMapping("/store")
+public class StoreController {
 
     private final StoreService storeService;
 
-    public LunchController(StoreService storeService) {
+    public StoreController(StoreService storeService) {
         this.storeService = storeService;
     }
 
