@@ -1,8 +1,8 @@
-package com.fun.lunch.controller;
+package com.fun.lunch.domain.store.controller;
 
-import com.fun.lunch.dto.StoreRequest;
-import com.fun.lunch.dto.StoreResponse;
-import com.fun.lunch.service.StoreService;
+import com.fun.lunch.domain.store.dto.StoreRequest;
+import com.fun.lunch.domain.store.dto.StoreResponse;
+import com.fun.lunch.domain.store.service.StoreService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
