@@ -6,5 +6,5 @@ public interface WorksService {
 
     WorksAccessToken getAccessToken();
 
-    void sendBotMessage();
+    void sendTodayLunch();
 }

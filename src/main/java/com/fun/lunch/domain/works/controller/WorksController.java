@@ -37,7 +37,7 @@ public class WorksController {
     @PostMapping("push")
     public void sendWorksBotMessage() {
 
-        worksService.sendBotMessage();
+        worksService.sendTodayLunch();
 
     }
 }

@@ -1,10 +1,10 @@
 package com.fun.lunch.domain.works.service.impl;
 
+import com.fun.lunch.domain.store.service.StoreService;
 import com.fun.lunch.domain.works.dto.BotMessageButtonAction;
 import com.fun.lunch.domain.works.dto.BotMessageWrapper;
 import com.fun.lunch.domain.works.dto.WorksAccessToken;
 import com.fun.lunch.domain.works.dto.WorksAccessTokenRequest;
-import com.fun.lunch.domain.store.service.StoreService;
 import com.fun.lunch.domain.works.service.WorksService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -63,17 +63,16 @@ public class WorksServiceImpl implements WorksService {
     }
 
     @Override
-    public void sendBotMessage() {
+    public void sendTodayLunch() {
 
         String accessToken = "Bearer " + getAccessToken().getAccessToken();
 
-        sendSticker(accessToken);
-        sendText(accessToken);
-
+        sendLunchSticker(accessToken);
+        sendLunchText(accessToken);
 
     }
 
-    private void sendText(String accessToken) {
+    private void sendLunchText(String accessToken) {
 
         String todayStore = storeService.getRandomStore(storeService.getStores("k2systems")).name();
         String content = String.format("오늘 점심은\n[%s]\n어떠세요?", todayStore);
@@ -86,7 +85,7 @@ public class WorksServiceImpl implements WorksService {
 
     }
 
-    private void sendSticker(String accessToken) {
+    private void sendLunchSticker(String accessToken) {
 
         String[][] stickers = worksApi.getHungerStickers();
 
