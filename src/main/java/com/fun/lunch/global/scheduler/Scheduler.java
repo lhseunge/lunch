@@ -15,7 +15,7 @@ public class Scheduler {
         this.worksService = worksService;
     }
 
-    @Scheduled(cron = "0 20 10 * * *")
+    @Scheduled(cron = "0 20 10 * * Mon-Fri")
     public void sendTodayLunch() {
         worksService.sendTodayLunch();
     }
