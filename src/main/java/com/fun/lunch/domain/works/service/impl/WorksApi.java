@@ -1,6 +1,6 @@
 package com.fun.lunch.domain.works.service.impl;
 
-import com.fun.lunch.domain.works.dto.BotMessageWrapper;
+import com.fun.lunch.domain.works.dto.BotMessage;
 import com.fun.lunch.global.exception.CustomExceptionEnum;
 import com.fun.lunch.global.exception.ResponseException;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,7 +21,7 @@ public class WorksApi {
         this.webClient = webClient;
     }
 
-    public void sendWorksBotMessage(String accessToken, BotMessageWrapper<?> content) {
+    public void sendWorksBotMessage(String accessToken, BotMessage<?> content) {
 
         String channelId = "15e30482-5dd0-a8a9-086e-f65f3974f603"; // prod
 //        String channelId = "0781e7d9-6c8b-270b-bffc-83be2de971ff"; // dev

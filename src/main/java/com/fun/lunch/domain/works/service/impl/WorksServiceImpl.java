@@ -2,7 +2,7 @@ package com.fun.lunch.domain.works.service.impl;
 
 import com.fun.lunch.domain.store.service.StoreService;
 import com.fun.lunch.domain.works.dto.BotMessageButtonAction;
-import com.fun.lunch.domain.works.dto.BotMessageWrapper;
+import com.fun.lunch.domain.works.dto.BotMessage;
 import com.fun.lunch.domain.works.dto.WorksAccessToken;
 import com.fun.lunch.domain.works.dto.WorksAccessTokenRequest;
 import com.fun.lunch.domain.works.service.WorksService;
@@ -79,7 +79,7 @@ public class WorksServiceImpl implements WorksService {
 
         List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "웹으로 가기", "https://192.168.0.15:8814/"));
 
-        BotMessageWrapper<?> text = BotMessageWrapper.button(content, actions);
+        BotMessage<?> text = BotMessage.button(content, actions);
 
         worksApi.sendWorksBotMessage(accessToken, text);
 
@@ -91,7 +91,7 @@ public class WorksServiceImpl implements WorksService {
 
         int index = ThreadLocalRandom.current().nextInt(stickers.length);
 
-        BotMessageWrapper<?> sticker = BotMessageWrapper.sticker(stickers[index]);
+        BotMessage<?> sticker = BotMessage.sticker(stickers[index]);
 
         worksApi.sendWorksBotMessage(accessToken, sticker);
     }
