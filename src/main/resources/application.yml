@@ -16,3 +16,19 @@ spring:
     cache: false
   profiles:
     active: dev
+
+works:
+  auth:
+    baseUrl: https://auth.worksmobile.com/oauth2/v2.0/
+    grantType: urn:ietf:params:oauth:grant-type:jwt-bearer
+    clientId: K2QyhD6NCeYhwynPBicm
+    clientSecret: XbNeeMRUSl
+    scope: bot bot.message bot.read user
+    serviceAccount: gk8ez.serviceaccount@k2systems.kr
+  api:
+    baseUrl: https://www.worksapis.com/v1.0/
+    botId: 9145405
+
+jwt:
+  privateKeyPath: keys/works_private.key
+  expiration_time: 180
