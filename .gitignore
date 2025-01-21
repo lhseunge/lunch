@@ -44,3 +44,6 @@ keystore.p12
 
 ### privateKey ###
 /src/main/resources/keys/
+
+### k2s Domain ###
+/src/main/java/com/fun/lunch/domain/k2s/**
