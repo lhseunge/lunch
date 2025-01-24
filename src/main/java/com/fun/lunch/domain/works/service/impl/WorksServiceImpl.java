@@ -77,8 +77,8 @@ public class WorksServiceImpl implements WorksService {
         String todayStore = storeService.getRandomStore(storeService.getStores("k2systems")).name();
         String content = String.format("오늘 점심은\n[%s]\n어떠세요?", todayStore);
 
-        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "재투표 하기", "https://192.168.0.15:8814/works/push"));
-//        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "웹으로 가기", "https://192.168.0.15:8814/"));
+//        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "재투표 하기", "https://192.168.0.15:8814/works/push"));
+        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "웹으로 가기", "https://192.168.0.15:8814/"));
 
         BotMessage<?> text = BotMessage.button(content, actions);
 
