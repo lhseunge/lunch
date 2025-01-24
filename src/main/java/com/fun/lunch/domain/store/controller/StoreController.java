@@ -50,4 +50,9 @@ public class StoreController {
 
         return new ResponseEntity<>(storeService.deleteStore(id, personalKey), HttpStatus.OK);
     }
+
+    @GetMapping("/page")
+    public ResponseEntity<?> getStoreTest() {
+        return new ResponseEntity<>(storeService.pagingStores(), HttpStatus.OK);
+    }
 }
