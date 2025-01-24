@@ -3,6 +3,7 @@ package com.fun.lunch.domain.store.service;
 import com.fun.lunch.domain.store.dto.StoreRequest;
 import com.fun.lunch.domain.store.dto.StoreResponse;
 import com.fun.lunch.domain.store.entity.Store;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface StoreService {
     long deleteStore(long id, String personalKey);
 
     boolean isExistsStore(Store store);
+
+    Page<StoreResponse> pagingStores();
 }

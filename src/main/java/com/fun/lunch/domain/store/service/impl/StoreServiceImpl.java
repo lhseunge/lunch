@@ -10,6 +10,9 @@ import com.fun.lunch.domain.store.repository.StoreRepository;
 import com.fun.lunch.domain.store.service.StoreService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,5 +72,16 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public boolean isExistsStore(Store store) {
         return storeRepository.existsByNameAndLatitudeAndLongitude(store.getName(), store.getLatitude(), store.getLongitude());
+    }
+
+
+    @Override
+    public Page<StoreResponse> pagingStores() {
+
+        Pageable pageable = PageRequest.of(0, 2);
+
+        Page<Store> stores = storeRepository.findAll(pageable);
+
+        return stores.map(StoreResponse::new);
     }
 }
