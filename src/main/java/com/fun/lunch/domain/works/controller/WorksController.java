@@ -4,7 +4,7 @@ import com.fun.lunch.domain.works.dto.WorksAccessToken;
 import com.fun.lunch.domain.works.service.WorksService;
 import com.fun.lunch.domain.works.service.impl.JwtTokenProvider;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,10 +34,15 @@ public class WorksController {
 
     }
 
-    @GetMapping("push")
-    public void sendWorksBotMessage() {
+    @GetMapping("/push/{type}")
+    public void sendWorksBotMessage(@PathVariable("type") String type) {
 
-        worksService.sendTodayLunch();
+
+        switch (type) {
+            case "lunch" -> worksService.sendTodayLunch();
+            case "exception" -> worksService.sendException();
+        }
+
 
     }
 }
