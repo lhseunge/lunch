@@ -72,6 +72,15 @@ public class WorksServiceImpl implements WorksService {
 
     }
 
+    @Override
+    public void sendException() {
+
+        String accessToken = "Bearer " + getAccessToken().getAccessToken();
+
+        sendExceptionAlert(accessToken);
+
+    }
+
     private void sendLunchText(String accessToken) {
 
         String todayStore = storeService.getRandomStore(storeService.getStores("k2systems")).name();
@@ -82,7 +91,7 @@ public class WorksServiceImpl implements WorksService {
 
         BotMessage<?> text = BotMessage.button(content, actions);
 
-        worksApi.sendWorksBotMessage(accessToken, text);
+        worksApi.sendWorksBotMessageToChannel(accessToken, text);
 
     }
 
@@ -94,7 +103,24 @@ public class WorksServiceImpl implements WorksService {
 
         BotMessage<?> sticker = BotMessage.sticker(stickers[index]);
 
-        worksApi.sendWorksBotMessage(accessToken, sticker);
+        worksApi.sendWorksBotMessageToChannel(accessToken, sticker);
+    }
+
+    private void sendExceptionAlert(String accessToken) {
+
+        String content = String.format(
+                """
+                EXCEPTION Handled !!! \s
+                 Message : %s \s
+                  Cause  : %s
+                """
+                , "message ~~"
+                , "cause ~~"
+        );
+
+        BotMessage<?> text = BotMessage.text(content);
+
+        worksApi.sendWorksBotMessageToUser(accessToken, text);
     }
 
 }
