@@ -21,13 +21,27 @@ public class WorksApi {
         this.webClient = webClient;
     }
 
-    public void sendWorksBotMessage(String accessToken, BotMessage<?> content) {
+    public void sendWorksBotMessageToChannel(String accessToken, BotMessage<?> content) {
 
-        String channelId = "15e30482-5dd0-a8a9-086e-f65f3974f603"; // prod
-//        String channelId = "0781e7d9-6c8b-270b-bffc-83be2de971ff"; // dev
+        String channelId = "15e30482-5dd0-a8a9-086e-f65f3974f603"; // 직장인 고민거리 방
 
         webClient.post()
                 .uri("/bots/{botId}/channels/{channelId}/messages", botId, channelId)
+                .headers(header -> header.add("Authorization", accessToken))
+                .bodyValue(content)
+                .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError, response -> response.bodyToMono(String.class)
+                        .map(errorBody -> ResponseException.from(CustomExceptionEnum.WORKS_EXCEPTION, "4xx error: " + errorBody)))
+                .bodyToMono(String.class)
+                .block();
+    }
+
+    public void sendWorksBotMessageToUser(String accessToken, BotMessage<?> content) {
+
+        String userId = "0781e7d9-6c8b-270b-bffc-83be2de971ff"; // 밥 방
+
+        webClient.post()
+                .uri("/bots/{botId}/channels/{userId}/messages", botId, userId)
                 .headers(header -> header.add("Authorization", accessToken))
                 .bodyValue(content)
                 .retrieve()
