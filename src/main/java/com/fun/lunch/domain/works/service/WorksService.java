@@ -7,4 +7,6 @@ public interface WorksService {
     WorksAccessToken getAccessToken();
 
     void sendTodayLunch();
+
+    void sendException();
 }
