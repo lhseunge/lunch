@@ -1,10 +1,7 @@
 package com.fun.lunch.domain.works.service.impl;
 
 import com.fun.lunch.domain.store.service.StoreService;
-import com.fun.lunch.domain.works.dto.BotMessageButtonAction;
-import com.fun.lunch.domain.works.dto.BotMessage;
-import com.fun.lunch.domain.works.dto.WorksAccessToken;
-import com.fun.lunch.domain.works.dto.WorksAccessTokenRequest;
+import com.fun.lunch.domain.works.dto.*;
 import com.fun.lunch.domain.works.service.WorksService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -73,11 +70,11 @@ public class WorksServiceImpl implements WorksService {
     }
 
     @Override
-    public void sendException() {
+    public void sendException(ExceptionAlertRequest exceptionAlertRequest) {
 
         String accessToken = "Bearer " + getAccessToken().getAccessToken();
 
-        sendExceptionAlert(accessToken);
+        sendExceptionAlert(accessToken, exceptionAlertRequest);
 
     }
 
@@ -106,7 +103,7 @@ public class WorksServiceImpl implements WorksService {
         worksApi.sendWorksBotMessageToChannel(accessToken, sticker);
     }
 
-    private void sendExceptionAlert(String accessToken) {
+    private void sendExceptionAlert(String accessToken, ExceptionAlertRequest exceptionAlertRequest) {
 
         String content = String.format(
                 """

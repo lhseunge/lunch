@@ -1,5 +1,6 @@
 package com.fun.lunch.domain.works.service;
 
+import com.fun.lunch.domain.works.dto.ExceptionAlertRequest;
 import com.fun.lunch.domain.works.dto.WorksAccessToken;
 
 public interface WorksService {
@@ -8,5 +9,5 @@ public interface WorksService {
 
     void sendTodayLunch();
 
-    void sendException();
+    void sendException(ExceptionAlertRequest exceptionAlertRequest);
 }
