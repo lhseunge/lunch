@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -107,12 +109,31 @@ public class WorksServiceImpl implements WorksService {
 
         String content = String.format(
                 """
-                EXCEPTION Handled !!! \s
-                 Message : %s \s
-                  Cause  : %s
+                [%s] Exception Handled. \s
+                
+                ---------------------------
+                
+                API \s
+                > %s \s
+                
+                StackTrace \s
+                > %s \s
+                
+                UserId \s
+                > %s \s
+                
+                Massage \s
+                > %s \s
+                
+                Date \s
+                > %s \s
                 """
-                , "message ~~"
-                , "cause ~~"
+                , exceptionAlertRequest.getProject()
+                , exceptionAlertRequest.getMethod() + " " + exceptionAlertRequest.getUri()
+                , exceptionAlertRequest.getStackTrace()
+                , exceptionAlertRequest.getUserId()
+                , exceptionAlertRequest.getMessage()
+                , new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date())
         );
 
         BotMessage<?> text = BotMessage.text(content);
