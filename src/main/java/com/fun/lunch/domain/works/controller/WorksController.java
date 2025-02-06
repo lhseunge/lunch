@@ -1,12 +1,10 @@
 package com.fun.lunch.domain.works.controller;
 
+import com.fun.lunch.domain.works.dto.ExceptionAlertRequest;
 import com.fun.lunch.domain.works.dto.WorksAccessToken;
 import com.fun.lunch.domain.works.service.WorksService;
 import com.fun.lunch.domain.works.service.impl.JwtTokenProvider;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/works")
@@ -29,20 +27,16 @@ public class WorksController {
 
     @GetMapping("/access-token")
     public WorksAccessToken getAccessToken() {
-
         return worksService.getAccessToken();
-
     }
 
-    @GetMapping("/push/{type}")
-    public void sendWorksBotMessage(@PathVariable("type") String type) {
+    @GetMapping("/lunch")
+    public void sendLunchMessage() {
+            worksService.sendTodayLunch();
+    }
 
-
-        switch (type) {
-            case "lunch" -> worksService.sendTodayLunch();
-            case "exception" -> worksService.sendException();
-        }
-
-
+    @PostMapping("/exception")
+    public void sendExceptionMessage(@RequestBody ExceptionAlertRequest exceptionAlertRequest) {
+            worksService.sendException(exceptionAlertRequest);
     }
 }
