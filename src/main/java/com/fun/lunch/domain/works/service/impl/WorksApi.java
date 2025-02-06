@@ -6,6 +6,7 @@ import com.fun.lunch.global.exception.ResponseException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -21,6 +22,7 @@ public class WorksApi {
         this.webClient = webClient;
     }
 
+    @Async("threadPoolTaskExecutor")
     public void sendWorksBotMessageToChannel(String accessToken, BotMessage<?> content) {
 
         String channelId = "15e30482-5dd0-a8a9-086e-f65f3974f603"; // 직장인 고민거리 방
@@ -36,6 +38,7 @@ public class WorksApi {
                 .block();
     }
 
+    @Async("threadPoolTaskExecutor")
     public void sendWorksBotMessageToUser(String accessToken, BotMessage<?> content) {
 
         String userId = "0781e7d9-6c8b-270b-bffc-83be2de971ff"; // 밥 방
