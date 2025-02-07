@@ -30,8 +30,9 @@ public class WorksServiceImpl implements WorksService {
 
         String accessToken = "Bearer " + getAccessToken().getAccessToken();
 
-        sendLunchSticker(accessToken);
-        sendLunchText(accessToken);
+        for (BotMessage<?> message : messages) {
+            worksApi.sendWorksBotMessageToChannel(message);
+        }
 
     }
 
@@ -40,7 +41,7 @@ public class WorksServiceImpl implements WorksService {
 
         String accessToken = "Bearer " + getAccessToken().getAccessToken();
 
-        sendExceptionAlert(accessToken, exceptionAlertRequest);
+        worksApi.sendWorksBotMessageToUser(message);
 
     }
 
@@ -54,7 +55,6 @@ public class WorksServiceImpl implements WorksService {
 
         BotMessage<?> text = BotMessage.button(content, actions);
 
-        worksApi.sendWorksBotMessageToChannel(accessToken, text);
 
     }
 
@@ -66,7 +66,6 @@ public class WorksServiceImpl implements WorksService {
 
         BotMessage<?> sticker = BotMessage.sticker(stickers[index]);
 
-        worksApi.sendWorksBotMessageToChannel(accessToken, sticker);
     }
 
     private BotMessage<?> getExceptionAlert(ExceptionAlertRequest exceptionAlertRequest) {
@@ -102,7 +101,6 @@ public class WorksServiceImpl implements WorksService {
 
         BotMessage<?> text = BotMessage.text(content);
 
-        worksApi.sendWorksBotMessageToUser(accessToken, text);
     }
 
 }
