@@ -16,24 +16,24 @@ public class WorksConfig {
     private String apiBaseUrl;
 
     @Bean
-    @Qualifier("worksAuthBaseUrl")
+    @Qualifier("worksAuthClient")
     public WebClient authWebClient() {
         return WebClient.builder()
                 .baseUrl(authBaseUrl)
-                .defaultHeaders(header -> {
-                    header.add("Content-Type", "application/x-www-form-urlencoded");
-                })
+                .defaultHeaders(header ->
+                        header.add("Content-Type", "application/x-www-form-urlencoded")
+                )
                 .build();
     }
 
     @Bean
-    @Qualifier("worksApiBaseUrl")
+    @Qualifier("worksBotClient")
     public WebClient botWebClient() {
         return WebClient.builder()
                 .baseUrl(apiBaseUrl)
-                .defaultHeaders(header -> {
-                    header.add("Content-Type", "application/json");
-                })
+                .defaultHeaders(header ->
+                        header.add("Content-Type", "application/json")
+                )
                 .build();
     }
 

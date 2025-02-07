@@ -4,6 +4,7 @@ import com.fun.lunch.domain.works.dto.ExceptionAlertRequest;
 import com.fun.lunch.domain.works.dto.WorksAccessToken;
 import com.fun.lunch.domain.works.service.WorksService;
 import com.fun.lunch.domain.works.service.impl.JwtTokenProvider;
+import com.fun.lunch.domain.works.service.impl.WorksApi;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,10 +13,12 @@ public class WorksController {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final WorksService worksService;
+    private final WorksApi worksApi;
 
-    public WorksController(JwtTokenProvider jwtTokenProvider, WorksService worksService) {
+    public WorksController(JwtTokenProvider jwtTokenProvider, WorksService worksService, WorksApi worksApi) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.worksService = worksService;
+        this.worksApi = worksApi;
     }
 
     @GetMapping("/assertion")
@@ -27,7 +30,7 @@ public class WorksController {
 
     @GetMapping("/access-token")
     public WorksAccessToken getAccessToken() {
-        return worksService.getAccessToken();
+        return worksApi.generateToken();
     }
 
     @GetMapping("/lunch")
