@@ -1,13 +1,11 @@
 package com.fun.lunch.domain.works.service.impl;
 
 import com.fun.lunch.domain.store.service.StoreService;
-import com.fun.lunch.domain.works.dto.*;
+import com.fun.lunch.domain.works.dto.BotMessage;
+import com.fun.lunch.domain.works.dto.BotMessageButtonAction;
+import com.fun.lunch.domain.works.dto.ExceptionAlertRequest;
 import com.fun.lunch.domain.works.service.WorksService;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
