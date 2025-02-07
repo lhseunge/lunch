@@ -28,7 +28,10 @@ public class WorksServiceImpl implements WorksService {
     @Override
     public void sendTodayLunch() {
 
-        String accessToken = "Bearer " + getAccessToken().getAccessToken();
+        BotMessage<?>[] messages = {
+                getLunchSticker(),
+                getLunchText()
+        };
 
         for (BotMessage<?> message : messages) {
             worksApi.sendWorksBotMessageToChannel(message);
@@ -39,7 +42,7 @@ public class WorksServiceImpl implements WorksService {
     @Override
     public void sendException(ExceptionAlertRequest exceptionAlertRequest) {
 
-        String accessToken = "Bearer " + getAccessToken().getAccessToken();
+        BotMessage<?> message = getExceptionAlert(exceptionAlertRequest);
 
         worksApi.sendWorksBotMessageToUser(message);
 
@@ -53,18 +56,23 @@ public class WorksServiceImpl implements WorksService {
 //        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "재투표 하기", "https://192.168.0.15:8814/works/push"));
         List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "웹으로 가기", "https://192.168.0.15:8814/"));
 
-        BotMessage<?> text = BotMessage.button(content, actions);
-
+        return BotMessage.button(content, actions);
 
     }
 
     private BotMessage<?> getLunchSticker() {
 
-        String[][] stickers = worksApi.getHungerStickers();
+        String[][] stickers = new String[][]{
+                {"620", "4"},
+                {"1996", "446"},
+                {"16769", "1029"},
+                {"16770", "1029"},
+                {"51626517", "11538"}
+        };
 
         int index = ThreadLocalRandom.current().nextInt(stickers.length);
 
-        BotMessage<?> sticker = BotMessage.sticker(stickers[index]);
+        return BotMessage.sticker(stickers[index]);
 
     }
 
@@ -99,7 +107,7 @@ public class WorksServiceImpl implements WorksService {
                 , new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date())
         );
 
-        BotMessage<?> text = BotMessage.text(content);
+        return BotMessage.text(content);
 
     }
 
