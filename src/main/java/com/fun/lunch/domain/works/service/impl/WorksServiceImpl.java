@@ -26,29 +26,6 @@ public class WorksServiceImpl implements WorksService {
     }
 
     @Override
-    public WorksAccessToken getAccessToken() {
-
-        WorksAccessTokenRequest tokenRequest = WorksAccessTokenRequest.builder()
-                .assertion(jwtTokenProvider.buildAssertionToken())
-                .grantType(grantType)
-                .clientId(clientId)
-                .clientSecret(clientSecret)
-                .scope(scope)
-                .build();
-
-
-        return webClient.post()
-                .uri("/token")
-                .bodyValue(tokenRequest.toFormDataMap())
-                .retrieve()
-                .onStatus(HttpStatusCode::is4xxClientError, response -> response.bodyToMono(String.class)
-                        .map(errorBody -> new RuntimeException("4xx error: " + errorBody)))
-                .bodyToMono(WorksAccessToken.class)
-                .block();
-
-    }
-
-    @Override
     public void sendTodayLunch() {
 
         String accessToken = "Bearer " + getAccessToken().getAccessToken();
@@ -67,7 +44,7 @@ public class WorksServiceImpl implements WorksService {
 
     }
 
-    private void sendLunchText(String accessToken) {
+    private BotMessage<?> getLunchText() {
 
         String todayStore = storeService.getRandomStore(storeService.getStores("k2systems")).name();
         String content = String.format("오늘 점심은\n[%s]\n어떠세요?", todayStore);
@@ -81,7 +58,7 @@ public class WorksServiceImpl implements WorksService {
 
     }
 
-    private void sendLunchSticker(String accessToken) {
+    private BotMessage<?> getLunchSticker() {
 
         String[][] stickers = worksApi.getHungerStickers();
 
@@ -92,7 +69,7 @@ public class WorksServiceImpl implements WorksService {
         worksApi.sendWorksBotMessageToChannel(accessToken, sticker);
     }
 
-    private void sendExceptionAlert(String accessToken, ExceptionAlertRequest exceptionAlertRequest) {
+    private BotMessage<?> getExceptionAlert(ExceptionAlertRequest exceptionAlertRequest) {
 
         String content = String.format(
                 """
