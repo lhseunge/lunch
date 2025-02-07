@@ -17,23 +17,10 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class WorksServiceImpl implements WorksService {
 
-    @Value("${works.auth.grantType}")
-    private String grantType;
-    @Value("${works.auth.clientId}")
-    private String clientId;
-    @Value("${works.auth.clientSecret}")
-    private String clientSecret;
-    @Value("${works.auth.scope}")
-    private String scope;
-
-    private final WebClient webClient;
-    private final JwtTokenProvider jwtTokenProvider;
     private final WorksApi worksApi;
     private final StoreService storeService;
 
-    public WorksServiceImpl(@Qualifier("worksAuthBaseUrl") WebClient webClient, JwtTokenProvider jwtTokenProvider, WorksApi worksApi, StoreService storeService) {
-        this.webClient = webClient;
-        this.jwtTokenProvider = jwtTokenProvider;
+    public WorksServiceImpl(WorksApi worksApi, StoreService storeService) {
         this.worksApi = worksApi;
         this.storeService = storeService;
     }
