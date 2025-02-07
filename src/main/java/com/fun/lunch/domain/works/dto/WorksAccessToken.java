@@ -21,4 +21,8 @@ public class WorksAccessToken {
 
     @JsonProperty("expires_in")
     private String expiresIn;
+
+    public String getAccessToken() {
+        return "Bearer " + accessToken;
+    }
 }
