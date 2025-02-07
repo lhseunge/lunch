@@ -94,7 +94,7 @@ public class WorksServiceImpl implements WorksService {
                 Massage \s
                 > %s \s
                 
-                Date \s
+                DateTime \s
                 > %s \s
                 """
                 , exceptionAlertRequest.getProject()
