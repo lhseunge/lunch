@@ -42,7 +42,7 @@ public class WorksApi {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-//    @Async("threadPoolTaskExecutor")
+    @Async("threadPoolTaskExecutor")
     public void sendWorksBotMessageToChannel(BotMessage<?> content) {
 
         String accessToken = generateToken().getAccessToken();
