@@ -1,7 +1,9 @@
 package com.fun.lunch.domain.store.entity;
 
 import com.fun.lunch.domain.store.dto.StoreRequest;
+import com.fun.lunch.domain.store.dto.StoreResponse;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +16,7 @@ public class Store {
 
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
 
     private String description;
