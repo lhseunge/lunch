@@ -19,13 +19,11 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
+@RequiredArgsConstructor
 public class StoreServiceImpl implements StoreService {
 
     private final StoreRepository storeRepository;
-
-    public StoreServiceImpl(StoreRepository storeRepository) {
-        this.storeRepository = storeRepository;
-    }
+    private final DrawHistoryRepository drawHistoryRepository;
 
     @Override
     @Cacheable(value = "personalKey")
@@ -83,5 +81,10 @@ public class StoreServiceImpl implements StoreService {
         Page<Store> stores = storeRepository.findAll(pageable);
 
         return stores.map(StoreResponse::new);
+    }
+
+    @Override
+    public void saveDrawHistory(String personalKey, StoreResponse randomStore) {
+        drawHistoryRepository.save(DrawHistory.of(Personal.of(personalKey), Store.of(randomStore, Personal.of(personalKey))));
     }
 }

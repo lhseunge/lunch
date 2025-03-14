@@ -14,9 +14,12 @@ public interface StoreService {
     StoreResponse findAnyStore(List<StoreResponse> stores);
 
     StoreRequest saveStore(StoreRequest storeRequest);
+
     long deleteStore(long id, String personalKey);
 
     boolean isExistsStore(Store store);
 
     Page<StoreResponse> pagingStores();
+
+    void saveDrawHistory(String personalKey, StoreResponse randomStore);
 }

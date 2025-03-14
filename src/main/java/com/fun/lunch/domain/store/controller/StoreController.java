@@ -34,7 +34,11 @@ public class StoreController {
 
         List<StoreResponse> stores = storeService.getStores(personalKey);
 
-        return new ResponseEntity<>(storeService.getRandomStore(stores), HttpStatus.OK);
+        StoreResponse randomStore = storeService.findAnyStore(stores);
+
+        storeService.saveDrawHistory(personalKey, randomStore);
+
+        return new ResponseEntity<>(randomStore, HttpStatus.OK);
     }
 
     @PostMapping()
