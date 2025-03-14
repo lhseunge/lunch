@@ -37,7 +37,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public StoreResponse getRandomStore(List<StoreResponse> stores) {
+    public StoreResponse findAnyStore(List<StoreResponse> stores) {
 
         if (stores.isEmpty()) {
             throw ResponseException.from(CustomExceptionEnum.EMPTY_STORE_DATA);

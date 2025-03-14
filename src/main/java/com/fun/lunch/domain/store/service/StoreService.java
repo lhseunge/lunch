@@ -11,7 +11,7 @@ public interface StoreService {
 
     List<StoreResponse> getStores(String personalKey);
 
-    StoreResponse getRandomStore(List<StoreResponse> stores);
+    StoreResponse findAnyStore(List<StoreResponse> stores);
 
     StoreRequest saveStore(StoreRequest storeRequest);
     long deleteStore(long id, String personalKey);
