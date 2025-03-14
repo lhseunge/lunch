@@ -1,5 +1,6 @@
 package com.fun.lunch.domain.store.service;
 
+import com.fun.lunch.domain.store.dto.DrawHistoryResponse;
 import com.fun.lunch.domain.store.dto.StoreRequest;
 import com.fun.lunch.domain.store.dto.StoreResponse;
 import com.fun.lunch.domain.store.entity.Store;
@@ -20,6 +21,8 @@ public interface StoreService {
     boolean isExistsStore(Store store);
 
     Page<StoreResponse> pagingStores();
+
+    List<DrawHistoryResponse> getDrawStatistics(String personalKey);
 
     void saveDrawHistory(String personalKey, StoreResponse randomStore);
 }
