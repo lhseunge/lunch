@@ -22,7 +22,7 @@ public class Store {
     private double latitude;
     private double longitude;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personal_key")
     private Personal personal;
 
