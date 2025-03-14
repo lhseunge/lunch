@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "store", indexes = {@Index(columnList = "personal_key", name = "personal_idx")})
 @NoArgsConstructor
+@AllArgsConstructor
 public class Store {
 
     @Id()
