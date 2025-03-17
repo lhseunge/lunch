@@ -1,22 +1,30 @@
 package com.fun.lunch.domain.store.service.impl;
 
+import com.fun.lunch.domain.store.dto.DrawStatistics;
 import com.fun.lunch.domain.store.dto.StoreRequest;
 import com.fun.lunch.domain.store.dto.StoreResponse;
+import com.fun.lunch.domain.store.entity.DrawHistory;
 import com.fun.lunch.domain.store.entity.Personal;
 import com.fun.lunch.domain.store.entity.Store;
-import com.fun.lunch.global.exception.CustomExceptionEnum;
-import com.fun.lunch.global.exception.ResponseException;
+import com.fun.lunch.domain.store.repository.DrawHistoryRepository;
 import com.fun.lunch.domain.store.repository.StoreRepository;
 import com.fun.lunch.domain.store.service.StoreService;
+import com.fun.lunch.global.exception.CustomExceptionEnum;
+import com.fun.lunch.global.exception.ResponseException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @Service
 @RequiredArgsConstructor
@@ -81,6 +89,22 @@ public class StoreServiceImpl implements StoreService {
         Page<Store> stores = storeRepository.findAll(pageable);
 
         return stores.map(StoreResponse::new);
+    }
+
+    @Override
+    public List<DrawStatistics> getDrawStatistics(String personalKey) {
+
+        List<DrawStatistics> drawStatistics = new ArrayList<>();
+
+        List<DrawHistory> drawHistories = drawHistoryRepository.findTop30ByPersonal(Personal.of(personalKey), Sort.by(DESC, "date"));
+
+        drawHistories.stream().map(drawHistory -> drawHistory.getStore().getName()).distinct().forEach(storeName -> {
+
+            drawStatistics.add(new DrawStatistics(storeName, (int) drawHistories.stream()
+                    .filter(drawHistory -> storeName.equals(drawHistory.getStore().getName())).count()));
+        });
+
+        return drawStatistics;
     }
 
     @Override

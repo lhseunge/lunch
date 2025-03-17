@@ -59,4 +59,9 @@ public class StoreController {
     public ResponseEntity<?> getStoreTest() {
         return new ResponseEntity<>(storeService.pagingStores(), HttpStatus.OK);
     }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<?> getDrawStatistics(@RequestParam String personalKey) {
+        return new ResponseEntity<>(storeService.getDrawStatistics(personalKey), HttpStatus.OK);
+    }
 }
