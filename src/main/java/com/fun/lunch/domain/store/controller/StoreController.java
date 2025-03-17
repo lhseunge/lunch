@@ -33,10 +33,7 @@ public class StoreController {
     public ResponseEntity<?> getRandomStore(String personalKey) {
 
         List<StoreResponse> stores = storeService.getStores(personalKey);
-
         StoreResponse randomStore = storeService.findAnyStore(stores);
-
-        storeService.saveDrawHistory(personalKey, randomStore);
 
         return new ResponseEntity<>(randomStore, HttpStatus.OK);
     }
