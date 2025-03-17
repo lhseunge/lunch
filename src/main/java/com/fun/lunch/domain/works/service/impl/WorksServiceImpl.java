@@ -1,5 +1,6 @@
 package com.fun.lunch.domain.works.service.impl;
 
+import com.fun.lunch.domain.store.dto.StoreResponse;
 import com.fun.lunch.domain.store.service.StoreService;
 import com.fun.lunch.domain.works.dto.BotMessage;
 import com.fun.lunch.domain.works.dto.BotMessageButtonAction;
@@ -48,10 +49,17 @@ public class WorksServiceImpl implements WorksService {
 
     private BotMessage<?> getLunchText() {
 
-        String todayStore = storeService.findAnyStore(storeService.getStores("k2systems")).name();
-        String content = String.format("오늘 점심은\n[%s]\n어떠세요?", todayStore);
+        String personalKey = "k2systems";
 
-//        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "재투표 하기", "https://192.168.0.15:8814/works/push"));
+        List<StoreResponse> stores = storeService.getStores(personalKey);
+        StoreResponse anyStore = storeService.findAnyStore(stores);
+
+        String todayMenu = anyStore.name();
+        String content = String.format("오늘 점심은\n[%s]\n어떠세요?", todayMenu);
+
+        storeService.saveDrawHistory(personalKey, anyStore);
+
+//        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "통계 보기", "https://192.168.0.15:8814/statitics?personalKey=k2systems"));
         List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "웹으로 가기", "https://192.168.0.15:8814/"));
 
         return BotMessage.button(content, actions);
