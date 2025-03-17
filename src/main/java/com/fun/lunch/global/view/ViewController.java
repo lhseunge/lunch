@@ -25,4 +25,9 @@ public class ViewController {
     public String error() {
         return "error";
     }
+
+    @GetMapping("/statistics")
+    public String statistics() {
+        return "statistics";
+    }
 }
