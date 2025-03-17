@@ -3,6 +3,15 @@
     text-align: center;
 }
 
+#chartBlock {
+    text-align: center;
+}
+
+canvas {
+    height: 50em;
+    margin: 0 auto;
+}
+
 #datetime {
     top: 50em;
     margin: 0 auto;
