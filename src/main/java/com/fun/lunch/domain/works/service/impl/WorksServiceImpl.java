@@ -59,8 +59,8 @@ public class WorksServiceImpl implements WorksService {
 
         storeService.saveDrawHistory(personalKey, anyStore);
 
-//        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "통계 보기", "https://192.168.0.15:8814/statitics?personalKey=k2systems"));
-        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "웹으로 가기", "https://192.168.0.15:8814/"));
+        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "추첨 통계 보기", "https://192.168.0.16:8814/statistics"));
+//        List<BotMessageButtonAction> actions = List.of(new BotMessageButtonAction("uri", "웹으로 가기", "https://192.168.0.16:8814/"));
 
         return BotMessage.button(content, actions);
 
