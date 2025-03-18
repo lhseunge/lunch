@@ -35,11 +35,11 @@ public class WorksController {
 
     @GetMapping("/lunch")
     public void sendLunchMessage() {
-            worksService.sendTodayLunch();
+        worksService.sendTodayLunch();
     }
 
     @PostMapping("/exception")
     public void sendExceptionMessage(@RequestBody ExceptionAlertRequest exceptionAlertRequest) {
-            worksService.sendException(exceptionAlertRequest);
+        worksService.sendException(exceptionAlertRequest);
     }
 }

@@ -80,7 +80,6 @@ public class StoreServiceImpl implements StoreService {
         return storeRepository.existsByNameAndLatitudeAndLongitude(store.getName(), store.getLatitude(), store.getLongitude());
     }
 
-
     @Override
     public Page<StoreResponse> pagingStores() {
 
@@ -98,9 +97,13 @@ public class StoreServiceImpl implements StoreService {
 
         List<DrawHistory> drawHistories = drawHistoryRepository.findTop30ByPersonal(Personal.of(personalKey), Sort.by(DESC, "date"));
 
-        drawHistories.stream().map(drawHistory -> drawHistory.getStore().getName()).distinct().forEach(storeName ->
-                drawStatistics.add(new DrawStatistics(storeName, (int) drawHistories.stream()
-                        .filter(drawHistory -> storeName.equals(drawHistory.getStore().getName())).count()))
+        drawHistories.stream()
+                .map(drawHistory -> drawHistory.getStore().getName()).distinct().forEach(storeName ->
+                drawStatistics.add(
+                        new DrawStatistics(
+                                storeName,
+                                (int) drawHistories.stream().filter(drawHistory -> storeName.equals(drawHistory.getStore().getName())).count())
+                )
         );
 
         return drawStatistics;
