@@ -35,15 +35,11 @@
         })
             .then(response => response.json())
             .then(data => {
+                    const keys = data.map((data) => data.store);
+                    const values = data.map((data) => data.count);
 
-                console.log(Object.values(data));
-
-                const keys = data.map((data) => data.store);
-                const values = data.map((data) => data.count);
-
-                console.log(keys);
-                console.log(values);
-
+                    drawChart(keys, values)
+                    createTable(data)
 
                 new Chart(ctx, {
                         type: 'pie',
