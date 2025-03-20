@@ -68,7 +68,32 @@
         })
     }
 
+    function createTable(data) {
 
+        let tableHeaders = ["가게", "횟수"]
+
+        let tableHTML = '<table>';
+
+        tableHTML += '<tr>';
+
+        tableHeaders.forEach(key => {
+            tableHTML += `<th>${key}</th>`;
+        });
+
+        tableHTML += '</tr>';
+
+        data.forEach(item => {
+            tableHTML += '<tr>';
+            Object.values(item).forEach(value => {
+                tableHTML += `<td>${value}</td>`;
+            });
+            tableHTML += '</tr>';
+        });
+
+        tableHTML += '</table>';
+
+        document.getElementById("listBlock").innerHTML += tableHTML;
+    }
 
 
 </script>
