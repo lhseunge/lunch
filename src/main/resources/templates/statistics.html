@@ -41,26 +41,34 @@
                     drawChart(keys, values)
                     createTable(data)
 
-                new Chart(ctx, {
-                        type: 'pie',
-                        data: {
-                            labels: keys,
-                            datasets: [{
-                                label: '# of Votes',
-                                data: values
-                            }]
-                        },
-                        options: {
-                            scales: {
-
-                            }
-                        }
-                    })
                 }
             )
             .catch(error => console.error('Error:', error))
 
     }
+
+    function drawChart(keys, values) {
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: keys,
+                datasets: [{
+                    label: '# of Votes',
+                    data: values
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+            },
+        })
+    }
+
+
 
 
 </script>
