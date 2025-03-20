@@ -3,8 +3,27 @@
     text-align: center;
 }
 
-#chartBlock {
+#statisticsDescription {
     text-align: center;
+    font-size: large;
+}
+
+#statisticsBlock {
+    display: flex;
+    justify-content: center;
+}
+
+#listBlock {
+    margin: 1em;
+}
+
+th {
+    text-align: left;
+}
+
+td:last-child {
+    text-align: center;
+    font-weight: lighter;
 }
 
 canvas {
