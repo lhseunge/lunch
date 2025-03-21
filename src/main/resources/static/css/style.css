@@ -1,14 +1,10 @@
 
-#mapBlock {
-    text-align: center;
-}
-
 #statisticsDescription {
     text-align: center;
     font-size: large;
 }
 
-#statisticsBlock {
+#mapBlock, #statisticsBlock {
     text-align: center;
 }
 
@@ -19,6 +15,10 @@
 
 #listBlock {
     margin: 1em;
+}
+
+table {
+    justify-self: center;
 }
 
 th {
