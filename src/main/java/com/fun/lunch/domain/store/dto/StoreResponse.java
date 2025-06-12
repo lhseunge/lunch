@@ -12,4 +12,8 @@ public record StoreResponse(
     public StoreResponse(Store store) {
         this(store.getId(), store.getName(), store.getDescription(), store.getLatitude(), store.getLongitude());
     }
+
+    public StoreResponse(Long id, String name, double latitude, double longitude) {
+        this(id, name, null, latitude, longitude);
+    }
 }

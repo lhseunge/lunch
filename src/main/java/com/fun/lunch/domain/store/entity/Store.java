@@ -36,6 +36,13 @@ public class Store {
         this.personal = Personal.of(storeRequest.personalKey());
     }
 
+    public Store(String name, double latitude, double longitude, Personal personal) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.personal = personal;
+    }
+
     public static Store of(StoreResponse storeResponse, Personal personal) {
         return new Store(storeResponse.id(), storeResponse.name(), storeResponse.description(), storeResponse.latitude(), storeResponse.latitude(), personal);
     }
