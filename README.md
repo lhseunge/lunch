@@ -27,7 +27,7 @@ __Backend__
 - ORM: Spring Data JPA + QueryDSL 5.0.0
 - Build Tool: Gradle
 - Authentication: JWT (JJWT 0.12.6)
-- HTTP Client: Spring WebFlux (WebClient)
+- HTTP Client: WebClient
 - Cache: Spring Cache + Caffeine
 - Documentation: SpringDoc OpenAPI 3 (Swagger)
 - Utility: Lombok
