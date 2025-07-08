@@ -47,3 +47,5 @@ keystore.p12
 
 ### k2s Domain ###
 /src/main/java/com/fun/lunch/domain/k2s/**
+
+.env

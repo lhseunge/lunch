@@ -4,18 +4,18 @@ spring:
       dialect: h2
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/Workspace/DB/lunch
-    username: sa
-    password:
+    url: ${H2_URL:jdbc:h2:~/Workspace/DB/lunch}
+    username: ${H2_USERNAME:sa}
+    password: ${H2_PASSWORD:}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${JPA_DDL_AUTO:update}
     database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
-        format_sql: true
-        show_sql: true
+        format_sql: ${JPA_FORMAT_SQL:true}
+        show_sql: ${JPA_SHOW_SQL:true}
   h2:
     console:
       enabled: true

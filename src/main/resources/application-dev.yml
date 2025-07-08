@@ -3,17 +3,17 @@ spring:
     jdbc:
       dialect: postgresql
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/lunch
-    username: seungpro
-    password: seungpro
+    driver-class-name: ${DB_DRIVER:org.postgresql.Driver}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/lunch}
+    username: ${DB_USERNAME:seungpro}
+    password: ${DB_PASSWORD:seungpro}
   jpa:
     hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    database-platform: ${DB_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-        show_sql: true
-        default_schema: store
+        dialect: ${DB_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
+        format_sql: ${JPA_FORMAT_SQL:true}
+        show_sql: ${JPA_SHOW_SQL:true}
+        default_schema: ${DB_SCHEMA:store}
