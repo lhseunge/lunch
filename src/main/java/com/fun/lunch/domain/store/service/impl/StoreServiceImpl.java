@@ -38,7 +38,7 @@ public class StoreServiceImpl implements StoreService {
     public List<StoreResponse> getStores(String personalKey) {
 
         return storeRepository.findAllByPersonal(Personal.of(personalKey)).stream()
-                .map(StoreResponse::new)
+                .map(StoreResponse::toDto)
                 .toList();
     }
 
@@ -87,7 +87,7 @@ public class StoreServiceImpl implements StoreService {
 
         Page<Store> stores = storeRepository.findAll(pageable);
 
-        return stores.map(StoreResponse::new);
+        return stores.map(StoreResponse::toDto);
     }
 
     @Override

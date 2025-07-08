@@ -1,11 +1,12 @@
 package com.fun.lunch.domain.store.controller;
 
+import com.fun.lunch.domain.store.dto.DrawStatistics;
 import com.fun.lunch.domain.store.dto.StoreRequest;
 import com.fun.lunch.domain.store.dto.StoreResponse;
 import com.fun.lunch.domain.store.service.StoreService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,42 +24,43 @@ public class StoreController {
 
     @GetMapping("")
     @Operation(summary = "가게 조회")
-    public ResponseEntity<?> getStores(String personalKey) {
+    public ResponseEntity<List<StoreResponse>> getStores(String personalKey) {
 
-        return new ResponseEntity<>(storeService.getStores(personalKey), HttpStatus.OK);
+        return ResponseEntity.ok(storeService.getStores(personalKey));
     }
 
     @GetMapping("/random")
     @Operation(summary = "점심메뉴 뽑기")
-    public ResponseEntity<?> getRandomStore(String personalKey) {
+    public ResponseEntity<StoreResponse> getRandomStore(String personalKey) {
 
         List<StoreResponse> stores = storeService.getStores(personalKey);
         StoreResponse randomStore = storeService.findAnyStore(stores);
 
-        return new ResponseEntity<>(randomStore, HttpStatus.OK);
+        return ResponseEntity.ok(randomStore);
     }
 
     @PostMapping()
     @Operation(summary = "가게 저장")
-    public ResponseEntity<?> saveStore(@RequestBody @Valid StoreRequest storeRequest) {
+    public ResponseEntity<Void> saveStore(@RequestBody @Valid StoreRequest storeRequest) {
 
-        return new ResponseEntity<>(storeService.saveStore(storeRequest), HttpStatus.OK);
+        storeService.saveStore(storeRequest);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "가게 삭제")
     public ResponseEntity<?> deleteStore(@PathVariable long id, String personalKey) {
 
-        return new ResponseEntity<>(storeService.deleteStore(id, personalKey), HttpStatus.OK);
+        return ResponseEntity.ok(storeService.deleteStore(id, personalKey));
     }
 
     @GetMapping("/page")
-    public ResponseEntity<?> getStoreTest() {
-        return new ResponseEntity<>(storeService.pagingStores(), HttpStatus.OK);
+    public ResponseEntity<Page<StoreResponse>> getStoreTest() {
+        return ResponseEntity.ok(storeService.pagingStores());
     }
 
     @GetMapping("/statistics")
-    public ResponseEntity<?> getDrawStatistics(@RequestParam String personalKey) {
-        return new ResponseEntity<>(storeService.getDrawStatistics(personalKey), HttpStatus.OK);
+    public ResponseEntity<List<DrawStatistics>> getDrawStatistics(@RequestParam String personalKey) {
+        return ResponseEntity.ok(storeService.getDrawStatistics(personalKey));
     }
 }

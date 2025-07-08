@@ -21,10 +21,10 @@ public class PersonalController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addPersonalKey(@RequestBody @Valid PersonalRequest personalRequest) {
+    public ResponseEntity<PersonalRequest> addPersonalKey(@RequestBody @Valid PersonalRequest personalRequest) {
 
         personalService.insertPersonalKey(personalRequest.personalKey());
 
-        return new ResponseEntity<>(personalRequest, HttpStatus.OK);
+        return ResponseEntity.ok(personalRequest);
     }
 }

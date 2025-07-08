@@ -9,8 +9,9 @@ public record StoreResponse(
         double latitude,
         double longitude
 ) {
-    public StoreResponse(Store store) {
-        this(store.getId(), store.getName(), store.getDescription(), store.getLatitude(), store.getLongitude());
+
+    public static StoreResponse toDto(Store store) {
+        return new StoreResponse(store.getId(), store.getName(), store.getDescription(), store.getLatitude(), store.getLongitude());
     }
 
     public StoreResponse(Long id, String name, double latitude, double longitude) {
