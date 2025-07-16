@@ -7,33 +7,34 @@ import com.fun.lunch.domain.restaurant.dto.RestaurantResponse;
 import com.fun.lunch.domain.restaurant.service.DrawService;
 import com.fun.lunch.domain.restaurant.service.PersonalService;
 import com.fun.lunch.domain.restaurant.service.RestaurantService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class RestaurantFacadeImplTest {
 
+    @Mock
     private RestaurantService restaurantService;
-    private DrawService drawService;
-    private PersonalService personalService;
-    private RestaurantFacadeImpl restaurantFacade;
 
-    @BeforeEach
-    void setUp() {
-        restaurantService = mock(RestaurantService.class);
-        drawService = mock(DrawService.class);
-        personalService = mock(PersonalService.class);
-        restaurantFacade = new RestaurantFacadeImpl(restaurantService, drawService, personalService);
-    }
+    @Mock
+    private DrawService drawService;
+
+    @Mock
+    private PersonalService personalService;
+
+    @InjectMocks
+    private RestaurantFacadeImpl restaurantFacade;
 
     @Test
     @DisplayName("개인키로 식당 목록 조회 시 RestaurantService를 호출한다")
